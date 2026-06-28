@@ -6,6 +6,8 @@
   "packageManager": "pnpm@11.9.0",
   "scripts": {
     "dev": "vite",
+    "server": "json-server --watch db.json --port 3000",
+    "dev:full": "concurrently \"vite\" \"json-server --watch db.json --port 3000\"",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -15,9 +17,12 @@
     "lint:eslint": "eslint . --fix --cache"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "echarts": "^6.1.0",
     "element-plus": "^2.14.2",
     "pinia": "^3.0.4",
     "vue": "^3.5.38",
+    "vue-echarts": "^8.0.1",
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
@@ -26,10 +31,12 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/eslint-config-typescript": "^14.8.0",
     "@vue/tsconfig": "^0.9.1",
+    "concurrently": "^10.0.3",
     "eslint": "^10.5.0",
     "eslint-plugin-oxlint": "~1.69.0",
     "eslint-plugin-vue": "~10.9.2",
     "jiti": "^2.7.0",
+    "json-server": "1.0.0-beta.15",
     "npm-run-all2": "^9.0.2",
     "oxlint": "~1.69.0",
     "typescript": "~6.0.0",

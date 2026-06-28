@@ -4,6 +4,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue'),
+    },
+    {
       path: '/',
       name: 'home',
       component: () => import('../views/HomeView.vue'),
@@ -27,6 +32,11 @@ const router = createRouter({
       path: '/message',
       name: 'message',
       component: () => import('../views/MessageView.vue'),
+    },
+    {
+      path: '/chat/:conversationId',
+      name: 'chat',
+      component: () => import('../views/ChatView.vue'),
     },
     {
       path: '/profile',

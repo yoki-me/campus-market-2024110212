@@ -1,5 +1,5 @@
 # AI Collaboration Card
-
+# day 1
 Task4
 一.分析项目目录结构
 1.prompt:根据我的文件夹，分析项目目录结构
@@ -122,3 +122,73 @@ IDE 支持	VSCode + Volar
 
 3.自己的理解：这套技术栈的核心思路是：Vue 3 + Vite + Pinia + TypeScript 四件套互为支撑，OxLint 和 pnpm 进一步强化了速度和一致性。业务目录全部留白
 4.结论：要掌握Vue 3、TypeScript、Vite、Pinia等内容，看懂整体结构。
+
+
+# day 2
+
+一. 获取需求文档，建立类型系统与数据层
+1.prompt：访问 https://www.yuque.com/gaspar-8oozl/augo0g/uvrmgep4f70746vi，完成 Day2 的页面骨架与路由导航任务
+
+2.AI输出：
+- 从语雀文档提取完整的《校园轻集市需求分析》
+- 提炼四个业务场景：二手交易、失物招领、拼单搭子、跑腿委托
+- 提炼12个功能模块：身份创建、今日集市首页、集市信息浏览、信息详情查看、信息发布表单、收藏与取消收藏、模拟砍价互动、消息中心、个人中心、趋势看板、本地数据管理、交易安全提醒
+- 创建 src/types/index.ts：User、CampusItem（统一类型+4组专属字段）、Favorite、Conversation、Message、Notice、ItemFilters、PublishForm
+- 创建 db.json：1个用户、12条校园信息（覆盖四类场景）、2条收藏、1条会话、4条安全提醒
+- 创建 src/api/ 层：index.ts（fetch 封装）、users.ts、items.ts、favorites.ts、conversations.ts、messages.ts、notices.ts
+- 安装 json-server、echarts + vue-echarts、concurrently
+- 创建 Pinia Stores：user.ts（本地身份）、items.ts（信息CRUD+筛选）、favorites.ts（收藏切换）、messages.ts（会话+模拟回复）
+
+3.自己的理解：需求文档中四个业务场景虽然含义不同，但在代码层面可以共用同一个 CampusItem 类型，通过 type 字段区分，通过 price、lostOrFound、targetCount、reward 等可选字段承载差异化属性。这种"一个类型承载多变体"的设计避免了四套重复的页面和接口。另外 JSON Server 不是真正的后端，而是用 db.json 模拟 RESTful API，它支持 ?type=xxx&_sort=createdAt 等查询参数，前端可以像请求真实后端一样获取数据。
+
+4.最终结论：从需求分析到类型定义、数据模型、API 层、状态管理，建立了一条完整的前端数据流通链路。后续所有页面的数据展示、筛选、发布、收藏、消息都依赖这一层基础设施。
+
+
+二. 页面组件全面创建
+1.prompt：（延续上文计划中的步骤）创建全部共享组件和页面
+
+2.AI输出：
+创建 6 个共享组件：
+- AppNav.vue — 移动端底部 TabBar（后续废弃，改为 PC 顶部导航）
+- ItemCard.vue — 信息卡片（图片+标题+摘要+元信息）
+- SearchFilter.vue — 搜索栏 + 类型/校区/状态筛选 + 排序
+- TypeTag.vue / StatusTag.vue — 彩色标签
+- SafetyNotice.vue — 可折叠安全提醒
+
+创建/重写 9 个页面：
+- LoginView.vue — 渐变背景卡片表单
+- HomeView.vue — 欢迎卡片 + 统计 + 快捷入口 + 最新列表
+- ListView.vue — 搜索筛选 + 信息卡片网格
+- DetailView.vue — 详情 + 砍价弹窗
+- PublishView.vue — 类型选择 + 动态表单
+- MessageView.vue — 会话列表 + Tab切换
+- ChatView.vue — 消息气泡 + 模拟回复
+- ProfileView.vue — 用户资料 + 发布/收藏管理
+- BoardView.vue — 统计卡片 + ECharts 图表
+
+路由更新：添加 /login、/chat/:conversationId
+App.vue 更新：条件渲染导航栏、RouterView 容器
+
+3.自己的理解：AI 默认生成的是移动端优先布局（底部 TabBar、单列卡片）。但项目定位是 PC 端应用，后续需要根据 .docx 设计文档全面调整。
+
+4.最终结论：第一版实现了完整的功能闭环——所有页面都能从 API 读取数据，发布、收藏、消息等交互走通了完整的读写链路。但 UI 风格偏"Demo 感"，需要进一步升级。
+
+
+四. 看板页面路由跳转失效的排查与修复
+1.prompt：无法跳转到看板页面，请做出修改 → 从看板页面没办法丝滑跳转到其他页面，需要刷新才可以 → 怎么解决的？
+
+2.AI输出：
+排查过程：
+- 第一步：确认路由配置正确（/board 已注册），HTTP 返回 200
+- 第二步：发现 HTML 中 RouterLink 渲染异常，尝试改为 <a href> + @click.prevent 方式
+- 第三步：仍然无法从看板页跳转，但其他页面可以——问题范围缩小到 BoardView 自身
+- 第四步：定位根因——BoardView 中 ECharts 按需注册 use([PieChart, BarChart, ...]) 在运行时抛出未捕获错误，Vue 的全局响应式系统静默崩溃，导致 router.push() 全局失效
+
+解决方法：
+- 完全移除 ECharts 和 vue-echarts 依赖
+- 用纯 CSS 实现图表：conic-gradient 做圆环图、百分比 progress bar 做柱状图、带色进度条做状态分布
+- 导航栏改为原生 <a href> + @click.prevent="router.push()"，降低导航失效风险
+
+3.自己的理解：这个 bug 的教训很深刻。表面现象是"点击没反应"，容易误判为路由配置问题或 HTML 链接问题。但真正的原因是 ECharts 抛错后被 Vue 的静默错误处理吞掉，响应式系统被"毒死"了——页面静态 HTML 已经渲染出来所以看起来正常，但所有依赖 JavaScript 响应的操作（包括 router.push）全部失效。这说明引入第三方图表库时要优先考虑"失败了会怎样"。
+
+4.最终结论：对于教学项目，纯 CSS 图表的维护成本远低于 ECharts，不存在运行时崩溃风险。这个决策也符合需求文档的定位——"教学模拟项目，不追求真实产品级复杂度"。
