@@ -64,7 +64,7 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleString('zh-CN',
         <!-- Left -->
         <div class="dt-main">
           <div class="dt-img card" :style="{ backgroundImage: item.images?.[0] ? `url(${item.images[0]})` : 'none' }">
-            <span class="dt-type" :style="{ background: {secondhand:'#8b6914',lostfound:'#2d5a27',groupbuy:'#5b5ea6',errand:'#6b705c'}[item.type] }">{{ ItemTypeLabels[item.type] }}</span>
+            <span class="dt-type" :style="{ background: {trades:'#8b6914',lostFounds:'#2d5a27',groupBuys:'#5b5ea6',errands:'#6b705c'}[item.type] }">{{ ItemTypeLabels[item.type] }}</span>
           </div>
           <section class="card" style="padding:var(--s-6);margin-bottom:var(--s-5)">
             <h2 class="sec-title">详细描述</h2>
@@ -83,30 +83,30 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleString('zh-CN',
             <h1 class="dt-title">{{ item.title }}</h1>
 
             <!-- type-specific -->
-            <div v-if="item.type==='secondhand'" class="typed">
+            <div v-if="item.type==='trades'" class="typed">
               <div class="big-price">¥{{ item.price }}</div>
               <span class="typed-sub">{{ item.condition }}</span>
               <button v-if="item.allowBargain !== false" class="btn btn--ghost btn--sm" style="margin-top:var(--s-3)" @click="bargainOpen=!bargainOpen">
                 <el-icon :size="12"><Coin /></el-icon> {{ bargainOpen ? '收起砍价' : '我要砍价' }}
               </button>
             </div>
-            <div v-else-if="item.type==='lostfound'" class="typed">
+            <div v-else-if="item.type==='lostFounds'" class="typed">
               <strong>{{ item.lostOrFound === 'lost' ? '寻物启事' : '失物招领' }}</strong>
               <span class="typed-sub">时间：{{ item.eventTime }}</span>
               <span v-if="item.itemFeature" class="typed-sub">特征：{{ item.itemFeature }}</span>
             </div>
-            <div v-else-if="item.type==='groupbuy'" class="typed">
+            <div v-else-if="item.type==='groupBuys'" class="typed">
               <div class="big-price">{{ item.currentCount }}/{{ item.targetCount }} 人</div>
               <div class="pg-bar"><div class="pg-fill" :style="{ width: `${((item.currentCount||0)/(item.targetCount||1))*100}%` }"></div></div>
               <span class="typed-sub">截止：{{ item.deadline ? new Date(item.deadline).toLocaleDateString('zh-CN') : '' }}</span>
             </div>
-            <div v-else-if="item.type==='errand'" class="typed">
+            <div v-else-if="item.type==='errands'" class="typed">
               <div class="big-price">{{ item.reward ? `¥${item.reward}` : '面议' }}</div>
               <span class="typed-sub">{{ item.taskPlace || item.location }}</span>
             </div>
 
             <!-- Bargain -->
-            <div v-if="bargainOpen && item.type==='secondhand'" class="bargain-box">
+            <div v-if="bargainOpen && item.type==='trades'" class="bargain-box">
               <div class="bargain-row">
                 <span>¥</span><input v-model="bargainPrice" type="number" class="input" placeholder="你的出价" />
                 <button class="btn btn--primary btn--sm" :disabled="!bargainPrice || bargainLoading" @click="submitBargain">出价</button>

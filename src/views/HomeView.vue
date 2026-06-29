@@ -26,10 +26,10 @@ const heroImgs = [
 const heroIdx = ref(0)
 
 const entries: { key: ItemType; label: string; desc: string }[] = [
-  { key: 'secondhand', label: '二手交易', desc: '闲置物品买卖，物尽其用' },
-  { key: 'lostfound', label: '失物招领', desc: '遗失与拾获，互帮互助' },
-  { key: 'groupbuy', label: '拼单搭子', desc: '一起拼一起学，不再孤单' },
-  { key: 'errand', label: '跑腿委托', desc: '代取代办，校园互助' },
+  { key: 'trades', label: '二手交易', desc: '闲置物品买卖，物尽其用' },
+  { key: 'lostFounds', label: '失物招领', desc: '遗失与拾获，互帮互助' },
+  { key: 'groupBuys', label: '拼单搭子', desc: '一起拼一起学，不再孤单' },
+  { key: 'errands', label: '跑腿委托', desc: '代取代办，校园互助' },
 ]
 
 const statCards = [
@@ -48,9 +48,9 @@ onMounted(async () => {
       messagesStore.fetchConversations(),
     ])
     notices.value = nd as Notice[]
-    statCards[0].val = itemsStore.totalCount
-    statCards[1].val = favoritesStore.favoriteCount
-    statCards[2].val = messagesStore.totalUnreadCount
+    statCards[0]!.val = itemsStore.totalCount
+    statCards[1]!.val = favoritesStore.favoriteCount
+    statCards[2]!.val = messagesStore.totalUnreadCount
   } finally { loading.value = false }
   setInterval(() => { heroIdx.value = (heroIdx.value + 1) % heroImgs.length }, 6000)
 })
@@ -66,10 +66,10 @@ function fmt(dateStr: string) {
 
 function summary(item: CampusItem): string {
   switch (item.type) {
-    case 'secondhand': return `¥${item.price}`
-    case 'lostfound': return item.lostOrFound === 'lost' ? '寻物' : '招领'
-    case 'groupbuy': return `${item.currentCount}/${item.targetCount}人`
-    case 'errand': return item.reward ? `¥${item.reward}` : '面议'
+    case 'trades': return `¥${item.price}`
+    case 'lostFounds': return item.lostOrFound === 'lost' ? '寻物' : '招领'
+    case 'groupBuys': return `${item.currentCount}/${item.targetCount}人`
+    case 'errands': return item.reward ? `¥${item.reward}` : '面议'
     default: return ''
   }
 }

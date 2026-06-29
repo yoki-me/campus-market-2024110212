@@ -11,62 +11,74 @@
       "createdAt": "2026-06-01T10:00:00.000Z"
     },
     {
-      "nickname": "ally",
+      "id": "u2",
+      "nickname": "小橘子",
+      "college": "外国语学院",
+      "campus": "狮子山校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-06-02T10:00:00.000Z"
+    },
+    {
+      "id": "u3",
+      "nickname": "图书馆常客",
+      "college": "文学院",
+      "campus": "成龙校区",
+      "role": "学生",
+      "creditScore": 95,
+      "avatar": "",
+      "createdAt": "2026-06-03T10:00:00.000Z"
+    },
+    {
+      "nickname": "w",
+      "college": "理学院",
+      "campus": "狮子山校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-06-29T01:53:41.477Z",
+      "id": "l6gQpGcKzdQ"
+    },
+    {
+      "nickname": "w",
+      "college": "电子信息学院",
+      "campus": "遂宁校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-06-29T03:30:30.599Z",
+      "id": "jgZyszranKg"
+    },
+    {
+      "nickname": "w",
       "college": "计算机学院",
       "campus": "狮子山校区",
       "role": "学生",
       "creditScore": 100,
       "avatar": "",
-      "createdAt": "2026-06-28T03:52:54.958Z",
-      "id": "KtlLnIxelFU"
+      "createdAt": "2026-06-29T03:52:20.158Z",
+      "id": "1AUTrFpJ0jg"
     },
     {
-      "nickname": "0",
-      "college": "医学院",
+      "nickname": "w",
+      "college": "计算机学院",
       "campus": "狮子山校区",
       "role": "学生",
       "creditScore": 100,
       "avatar": "",
-      "createdAt": "2026-06-28T03:54:42.157Z",
-      "id": "pYh7lLST-S0"
-    },
-    {
-      "nickname": "1",
-      "college": "计算机学院",
-      "campus": "成龙校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-28T06:37:58.923Z",
-      "id": "EtPGa9UbyyQ"
-    },
-    {
-      "nickname": "guo",
-      "college": "计算机学院",
-      "campus": "成龙校区",
-      "role": "教职工",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-28T07:41:38.070Z",
-      "id": "W0mtrb0agDU"
-    },
-    {
-      "nickname": "guo",
-      "college": "计算机学院",
-      "campus": "成龙校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-28T07:48:23.327Z",
-      "id": "0Wu3MqzLbiY"
+      "createdAt": "2026-06-29T03:52:40.917Z",
+      "id": "7Nj79eSpSWA"
     }
   ],
-  "items": [
+  "trades": [
     {
-      "id": "i1",
-      "type": "secondhand",
+      "id": "t1",
       "title": "二手笔记本电脑 ThinkPad X1",
       "description": "9成新，i7处理器，16G内存，512G固态硬盘，电池续航4小时以上。适合编程学习和日常使用，附赠原装充电器。",
+      "price": 2500,
+      "originalPrice": 5500,
+      "condition": "9成新",
       "campus": "狮子山校区",
       "location": "学生公寓3号楼",
       "tags": [
@@ -79,20 +91,20 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "open",
+      "allowBargain": true,
       "viewCount": 238,
       "favoriteCount": 15,
       "createdAt": "2026-06-20T08:30:00.000Z",
-      "updatedAt": "2026-06-20T08:30:00.000Z",
-      "price": 2500,
-      "condition": "9成新",
-      "allowBargain": true
+      "updatedAt": "2026-06-20T08:30:00.000Z"
     },
     {
-      "id": "i2",
-      "type": "secondhand",
+      "id": "t2",
       "title": "考研数学复习全书（2026版）",
       "description": "几乎全新，只用过前两章，包含高数、线代、概率论全套知识点和习题。适合备战考研的同学。",
+      "price": 50,
+      "originalPrice": 98,
+      "condition": "几乎全新",
       "campus": "狮子山校区",
       "location": "图书馆一楼",
       "tags": [
@@ -105,20 +117,20 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "open",
+      "allowBargain": false,
       "viewCount": 156,
       "favoriteCount": 8,
       "createdAt": "2026-06-19T14:20:00.000Z",
-      "updatedAt": "2026-06-19T14:20:00.000Z",
-      "price": 50,
-      "condition": "几乎全新",
-      "allowBargain": false
+      "updatedAt": "2026-06-19T14:20:00.000Z"
     },
     {
-      "id": "i3",
-      "type": "secondhand",
+      "id": "t3",
       "title": "山地自行车 捷安特ATX860",
       "description": "去年买的，骑行不到500公里，27速，车况良好，刹车灵敏。因毕业离校转让，送头盔和车锁。",
+      "price": 1200,
+      "originalPrice": 2698,
+      "condition": "8成新",
       "campus": "成龙校区",
       "location": "东区车棚",
       "tags": [
@@ -129,24 +141,104 @@
       "images": [
         "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&q=80"
       ],
-      "publisherId": "u1",
-      "publisherName": "校园用户",
-      "status": "active",
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "open",
+      "allowBargain": true,
       "viewCount": 421,
       "favoriteCount": 22,
       "createdAt": "2026-06-18T10:15:00.000Z",
-      "updatedAt": "2026-06-18T10:15:00.000Z",
-      "price": 1200,
-      "condition": "8成新",
-      "allowBargain": true
+      "updatedAt": "2026-06-18T10:15:00.000Z"
     },
     {
-      "id": "i4",
-      "type": "lostfound",
+      "id": "t4",
+      "title": "宿舍用小冰箱 50L",
+      "description": "小冰箱适合宿舍使用，冷藏效果很好，噪音小。毕业季低价转让，附赠除霜铲。",
+      "price": 280,
+      "originalPrice": 699,
+      "condition": "7成新",
+      "campus": "狮子山校区",
+      "location": "学生公寓7号楼",
+      "tags": [
+        "家电",
+        "宿舍",
+        "毕业季"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&q=80"
+      ],
+      "publisherId": "u1",
+      "publisherName": "校园用户",
+      "status": "closed",
+      "allowBargain": true,
+      "viewCount": 567,
+      "favoriteCount": 38,
+      "createdAt": "2026-06-10T09:00:00.000Z",
+      "updatedAt": "2026-06-15T18:00:00.000Z"
+    },
+    {
+      "id": "t5",
+      "title": "机械键盘 Cherry MX红轴",
+      "description": "Cherry原厂红轴，87键布局，RGB背光，用了半年左右，按键手感依旧出色。换了新键盘所以出掉。",
+      "price": 180,
+      "originalPrice": 449,
+      "condition": "9成新",
+      "campus": "成龙校区",
+      "location": "东区学生公寓1号楼",
+      "tags": [
+        "键盘",
+        "数码",
+        "外设"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&q=80"
+      ],
+      "publisherId": "u3",
+      "publisherName": "图书馆常客",
+      "status": "open",
+      "allowBargain": true,
+      "viewCount": 189,
+      "favoriteCount": 11,
+      "createdAt": "2026-06-25T16:00:00.000Z",
+      "updatedAt": "2026-06-25T16:00:00.000Z"
+    },
+    {
+      "id": "t6",
+      "title": "二手吉他 雅马哈F310",
+      "description": "入门级民谣吉他，音色温暖，非常适合新手练习。弦距已调好，送调音器和备用琴弦一套。",
+      "price": 350,
+      "originalPrice": 799,
+      "condition": "8成新",
+      "campus": "狮子山校区",
+      "location": "学生活动中心",
+      "tags": [
+        "乐器",
+        "吉他",
+        "音乐"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600&q=80"
+      ],
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "open",
+      "allowBargain": true,
+      "viewCount": 312,
+      "favoriteCount": 26,
+      "createdAt": "2026-06-22T11:00:00.000Z",
+      "updatedAt": "2026-06-22T11:00:00.000Z"
+    }
+  ],
+  "lostFounds": [
+    {
+      "id": "lf1",
       "title": "丢失校园卡一张",
       "description": "6月25日下午在图书馆二楼阅览室丢失，卡片背面贴有蓝色贴纸。如有捡到请联系，非常感谢！",
+      "type": "lost",
       "campus": "狮子山校区",
       "location": "图书馆二楼",
+      "eventTime": "2026-06-25",
+      "itemFeature": "蓝色贴纸标记，卡号后四位3821",
       "tags": [
         "校园卡",
         "证件"
@@ -156,22 +248,21 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "open",
       "viewCount": 89,
       "favoriteCount": 3,
       "createdAt": "2026-06-25T16:00:00.000Z",
-      "updatedAt": "2026-06-25T16:00:00.000Z",
-      "lostOrFound": "lost",
-      "eventTime": "2026-06-25",
-      "itemFeature": "蓝色贴纸标记，卡号后四位3821"
+      "updatedAt": "2026-06-25T16:00:00.000Z"
     },
     {
-      "id": "i5",
-      "type": "lostfound",
+      "id": "lf2",
       "title": "拾获一副蓝牙耳机",
-      "description": "6月26日上午在东区食堂门口捡到一副白色蓝牙耳机，有保护壳。请失主尽快联系认领。",
+      "description": "6月26日上午在东区食堂门口捡到一副白色蓝牙耳机，有硅胶保护壳。请失主尽快联系认领。",
+      "type": "found",
       "campus": "成龙校区",
       "location": "东区食堂门口",
+      "eventTime": "2026-06-26",
+      "itemFeature": "白色，带硅胶保护壳，品牌不详",
       "tags": [
         "耳机",
         "电子产品"
@@ -179,24 +270,23 @@
       "images": [
         "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80"
       ],
-      "publisherId": "u1",
-      "publisherName": "校园用户",
-      "status": "active",
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "open",
       "viewCount": 67,
       "favoriteCount": 5,
       "createdAt": "2026-06-26T09:00:00.000Z",
-      "updatedAt": "2026-06-26T09:00:00.000Z",
-      "lostOrFound": "found",
-      "eventTime": "2026-06-26",
-      "itemFeature": "白色，带硅胶保护壳，品牌不详"
+      "updatedAt": "2026-06-26T09:00:00.000Z"
     },
     {
-      "id": "i6",
-      "type": "lostfound",
-      "title": "丢失水杯一个",
+      "id": "lf3",
+      "title": "丢失保温杯一个",
       "description": "蓝色保温杯，品牌膳魔师，6月24日在教学楼A座3楼教室遗落。有纪念意义，恳请归还。",
+      "type": "lost",
       "campus": "狮子山校区",
       "location": "教学楼A座3楼",
+      "eventTime": "2026-06-24",
+      "itemFeature": "蓝色膳魔师保温杯，500ml，底部有轻微划痕",
       "tags": [
         "水杯",
         "日用品"
@@ -210,18 +300,86 @@
       "viewCount": 45,
       "favoriteCount": 2,
       "createdAt": "2026-06-24T11:30:00.000Z",
-      "updatedAt": "2026-06-25T18:00:00.000Z",
-      "lostOrFound": "lost",
-      "eventTime": "2026-06-24",
-      "itemFeature": "蓝色膳魔师保温杯，500ml"
+      "updatedAt": "2026-06-25T18:00:00.000Z"
     },
     {
-      "id": "i7",
-      "type": "groupbuy",
-      "title": "奶茶拼单-一点点四季春茶",
+      "id": "lf4",
+      "title": "丢失U盘一个（金士顿32G）",
+      "description": "6月27日下午在机房B201上课时遗落，银色金属外壳，32G容量。U盘里有课程作业文件，非常重要！",
+      "type": "lost",
+      "campus": "狮子山校区",
+      "location": "机房B201",
+      "eventTime": "2026-06-27",
+      "itemFeature": "金士顿银色金属U盘，32G，挂有一个小钥匙扣",
+      "tags": [
+        "U盘",
+        "电子产品",
+        "急寻"
+      ],
+      "images": [],
+      "publisherId": "u1",
+      "publisherName": "校园用户",
+      "status": "open",
+      "viewCount": 134,
+      "favoriteCount": 8,
+      "createdAt": "2026-06-27T16:30:00.000Z",
+      "updatedAt": "2026-06-27T16:30:00.000Z"
+    },
+    {
+      "id": "lf5",
+      "title": "拾获一串钥匙",
+      "description": "6月28日早上在操场跑道边捡到一串钥匙，共3把，有一个小猫咪挂件。请失主速来认领。",
+      "type": "found",
+      "campus": "成龙校区",
+      "location": "操场",
+      "eventTime": "2026-06-28",
+      "itemFeature": "3把钥匙，卡通猫咪硅胶挂件，钥匙圈为银色",
+      "tags": [
+        "钥匙",
+        "日用品"
+      ],
+      "images": [],
+      "publisherId": "u3",
+      "publisherName": "图书馆常客",
+      "status": "open",
+      "viewCount": 57,
+      "favoriteCount": 1,
+      "createdAt": "2026-06-28T08:00:00.000Z",
+      "updatedAt": "2026-06-28T08:00:00.000Z"
+    },
+    {
+      "id": "lf6",
+      "title": "丢失雨伞一把",
+      "description": "黑色长柄伞，天堂牌，6月26日下雨天在教学楼C座门口被误拿或丢失。伞柄缠有红色绳子。",
+      "type": "lost",
+      "campus": "狮子山校区",
+      "location": "教学楼C座门口",
+      "eventTime": "2026-06-26",
+      "itemFeature": "黑色天堂长柄伞，伞柄有红色尼龙绳缠绕标记",
+      "tags": [
+        "雨伞",
+        "日用品"
+      ],
+      "images": [],
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "open",
+      "viewCount": 78,
+      "favoriteCount": 4,
+      "createdAt": "2026-06-26T19:00:00.000Z",
+      "updatedAt": "2026-06-26T19:00:00.000Z"
+    }
+  ],
+  "groupBuys": [
+    {
+      "id": "gb1",
+      "title": "奶茶拼单——一点点四季春茶",
       "description": "一点点奶茶拼单，四季春茶+波霸，中杯和大杯可选。满4人成团，目前已有2人，还差2人。",
+      "targetCount": 4,
+      "currentCount": 2,
       "campus": "狮子山校区",
       "location": "校门口一点点奶茶店",
+      "deadline": "2026-06-28T18:00:00.000Z",
       "tags": [
         "奶茶",
         "拼单",
@@ -232,22 +390,21 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "closed",
       "viewCount": 178,
       "favoriteCount": 12,
       "createdAt": "2026-06-27T15:00:00.000Z",
-      "updatedAt": "2026-06-27T15:00:00.000Z",
-      "targetCount": 4,
-      "currentCount": 2,
-      "deadline": "2026-06-28T18:00:00.000Z"
+      "updatedAt": "2026-06-28T19:00:00.000Z"
     },
     {
-      "id": "i8",
-      "type": "groupbuy",
+      "id": "gb2",
       "title": "找考研学习搭子",
       "description": "2026考研备考，想找一个可以一起自习、互相监督的学习搭子。本人计算机专业，每天图书馆三楼。",
+      "targetCount": 2,
+      "currentCount": 1,
       "campus": "狮子山校区",
       "location": "图书馆三楼",
+      "deadline": "2026-07-15T00:00:00.000Z",
       "tags": [
         "考研",
         "学习",
@@ -258,22 +415,21 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "open",
       "viewCount": 312,
       "favoriteCount": 18,
       "createdAt": "2026-06-22T09:00:00.000Z",
-      "updatedAt": "2026-06-22T09:00:00.000Z",
-      "targetCount": 2,
-      "currentCount": 1,
-      "deadline": "2026-07-15T00:00:00.000Z"
+      "updatedAt": "2026-06-22T09:00:00.000Z"
     },
     {
-      "id": "i9",
-      "type": "groupbuy",
-      "title": "水果团购-当季水蜜桃",
-      "description": "团购当季水蜜桃，产地直发，一箱10斤约20个。需要满10箱才能享受团购价，目前已有6人。",
+      "id": "gb3",
+      "title": "水果团购——当季水蜜桃",
+      "description": "团购当季水蜜桃，产地直发，一箱10斤约20个。满10箱享受团购价每箱45元（原价65元），目前已有6人。",
+      "targetCount": 10,
+      "currentCount": 6,
       "campus": "成龙校区",
       "location": "东区学生活动中心",
+      "deadline": "2026-06-30T23:59:00.000Z",
       "tags": [
         "水果",
         "团购",
@@ -282,24 +438,95 @@
       "images": [
         "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&q=80"
       ],
-      "publisherId": "u1",
-      "publisherName": "校园用户",
-      "status": "in_progress",
+      "publisherId": "u3",
+      "publisherName": "图书馆常客",
+      "status": "open",
       "viewCount": 203,
       "favoriteCount": 25,
       "createdAt": "2026-06-21T16:00:00.000Z",
-      "updatedAt": "2026-06-26T10:00:00.000Z",
-      "targetCount": 10,
-      "currentCount": 6,
-      "deadline": "2026-06-30T23:59:00.000Z"
+      "updatedAt": "2026-06-26T10:00:00.000Z"
     },
     {
-      "id": "i10",
-      "type": "errand",
-      "title": "代取快递-申通快递",
-      "description": "有一个申通快递在菜鸟驿站，比较大件（收纳箱），不太方便自己拿。求帮忙代取送到公寓楼下。",
+      "id": "gb4",
+      "title": "健身房月卡拼团",
+      "description": "学校附近新开的乐刻健身房月卡，3人拼团每人只要99元（原价199）。找2个小伙伴一起冲！",
+      "targetCount": 3,
+      "currentCount": 1,
       "campus": "狮子山校区",
-      "location": "菜鸟驿站",
+      "location": "校外乐刻健身房（南门步行5分钟）",
+      "deadline": "2026-07-05T00:00:00.000Z",
+      "tags": [
+        "健身",
+        "运动",
+        "拼团"
+      ],
+      "images": [],
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "open",
+      "viewCount": 157,
+      "favoriteCount": 9,
+      "createdAt": "2026-06-28T12:00:00.000Z",
+      "updatedAt": "2026-06-28T12:00:00.000Z"
+    },
+    {
+      "id": "gb5",
+      "title": "周末密室逃脱搭子",
+      "description": "本周末想去校外新开的密室逃脱「古宅惊魂」，需要4-6人组队。目前2人，再来2-4个胆大的小伙伴！费用AA，人均约60元。",
+      "targetCount": 6,
+      "currentCount": 2,
+      "campus": "成龙校区",
+      "location": "校外商业街2楼密室逃脱馆",
+      "deadline": "2026-06-29T20:00:00.000Z",
+      "tags": [
+        "娱乐",
+        "密室",
+        "周末"
+      ],
+      "images": [],
+      "publisherId": "u3",
+      "publisherName": "图书馆常客",
+      "status": "open",
+      "viewCount": 267,
+      "favoriteCount": 31,
+      "createdAt": "2026-06-27T20:00:00.000Z",
+      "updatedAt": "2026-06-27T20:00:00.000Z"
+    },
+    {
+      "id": "gb6",
+      "title": "二手教材团购——计算机专业全套",
+      "description": "联系了学长打包出售计科专业大二全套教材（数据结构、操作系统、计网等共8本），凑5人一起买，每人仅需80元。",
+      "targetCount": 5,
+      "currentCount": 3,
+      "campus": "狮子山校区",
+      "location": "计算机学院教学楼",
+      "deadline": "2026-07-03T18:00:00.000Z",
+      "tags": [
+        "教材",
+        "团购",
+        "学习"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&q=80"
+      ],
+      "publisherId": "u1",
+      "publisherName": "校园用户",
+      "status": "open",
+      "viewCount": 98,
+      "favoriteCount": 7,
+      "createdAt": "2026-06-28T14:00:00.000Z",
+      "updatedAt": "2026-06-28T14:00:00.000Z"
+    }
+  ],
+  "errands": [
+    {
+      "id": "e1",
+      "title": "代取快递——申通大件",
+      "description": "有一个申通快递在菜鸟驿站，比较大件（收纳箱），不太方便自己拿。求帮忙代取送到公寓楼下。",
+      "reward": 10,
+      "taskPlace": "菜鸟驿站 → 学生公寓3号楼",
+      "campus": "狮子山校区",
+      "expectedTime": "2026-06-28",
       "tags": [
         "快递",
         "代取",
@@ -310,22 +537,20 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "closed",
       "viewCount": 95,
       "favoriteCount": 4,
       "createdAt": "2026-06-27T10:00:00.000Z",
-      "updatedAt": "2026-06-27T10:00:00.000Z",
-      "reward": 10,
-      "taskPlace": "菜鸟驿站 → 学生公寓3号楼",
-      "expectedTime": "2026-06-28"
+      "updatedAt": "2026-06-28T16:00:00.000Z"
     },
     {
-      "id": "i11",
-      "type": "errand",
-      "title": "代排队-教务处打印成绩单",
-      "description": "需要打印正式成绩单，但教务处排队时间太长。求帮忙代排队打印，取件时验货付款。",
+      "id": "e2",
+      "title": "代排队——教务处打印成绩单",
+      "description": "需要打印正式成绩单用于实习申请，但教务处排队时间太长。求帮忙代排队打印，取件时验货付款。",
+      "reward": 20,
+      "taskPlace": "行政楼教务处",
       "campus": "狮子山校区",
-      "location": "教务处行政楼",
+      "expectedTime": "2026-06-29",
       "tags": [
         "排队",
         "打印",
@@ -336,22 +561,20 @@
       ],
       "publisherId": "u1",
       "publisherName": "校园用户",
-      "status": "active",
+      "status": "open",
       "viewCount": 67,
       "favoriteCount": 3,
       "createdAt": "2026-06-26T08:30:00.000Z",
-      "updatedAt": "2026-06-26T08:30:00.000Z",
-      "reward": 20,
-      "taskPlace": "行政楼教务处",
-      "expectedTime": "2026-06-29"
+      "updatedAt": "2026-06-26T08:30:00.000Z"
     },
     {
-      "id": "i12",
-      "type": "errand",
-      "title": "代买早餐-食堂包子豆浆",
+      "id": "e3",
+      "title": "代买早餐——食堂包子豆浆",
       "description": "周末不想早起，求帮忙从食堂带早餐：两个肉包+一杯豆浆。送到公寓楼下即可。",
+      "reward": 5,
+      "taskPlace": "东区食堂 → 东区公寓5号楼",
       "campus": "成龙校区",
-      "location": "东区食堂",
+      "expectedTime": "2026-06-20",
       "tags": [
         "早餐",
         "代买",
@@ -360,76 +583,116 @@
       "images": [
         "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80"
       ],
-      "publisherId": "u1",
-      "publisherName": "校园用户",
-      "status": "completed",
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "closed",
       "viewCount": 134,
       "favoriteCount": 6,
       "createdAt": "2026-06-20T07:00:00.000Z",
-      "updatedAt": "2026-06-20T08:30:00.000Z",
-      "reward": 5,
-      "taskPlace": "东区食堂 → 东区公寓5号楼",
-      "expectedTime": "2026-06-20"
+      "updatedAt": "2026-06-20T08:30:00.000Z"
     },
     {
-      "type": "groupbuy",
-      "title": "求搭子",
-      "description": "111",
-      "campus": "主校区",
-      "location": "食堂",
-      "tags": [],
+      "id": "e4",
+      "title": "代还图书——图书馆到期了",
+      "description": "有两本书今天到期但我人在校外实习回不来，求帮忙从公寓桌子拿着去图书馆还书。书已经准备好了，就放在桌上。",
+      "reward": 8,
+      "taskPlace": "东区公寓2号楼 → 图书馆",
+      "campus": "成龙校区",
+      "expectedTime": "2026-06-29",
+      "tags": [
+        "还书",
+        "图书馆",
+        "跑腿"
+      ],
       "images": [],
-      "publisherId": "KtlLnIxelFU",
-      "publisherName": "ally",
-      "status": "active",
-      "viewCount": 0,
-      "favoriteCount": 0,
-      "targetCount": 2,
-      "currentCount": 1,
-      "deadline": "2026-06-30T03:53:00.000Z",
-      "createdAt": "2026-06-28T03:53:45.711Z",
-      "updatedAt": "2026-06-28T03:53:45.711Z",
-      "id": "290M7-S-V00"
+      "publisherId": "u3",
+      "publisherName": "图书馆常客",
+      "status": "open",
+      "viewCount": 43,
+      "favoriteCount": 2,
+      "createdAt": "2026-06-28T08:00:00.000Z",
+      "updatedAt": "2026-06-28T08:00:00.000Z"
     },
     {
-      "type": "groupbuy",
-      "title": "1111111",
-      "description": "11",
+      "id": "e5",
+      "title": "代搬行李——女生宿舍换楼层",
+      "description": "期末搬宿舍从5楼搬到2楼，有两个行李箱和三个收纳袋。自己搬太吃力了，求身强力壮的同学帮忙搬运，有电梯。",
+      "reward": 25,
+      "taskPlace": "学生公寓6号楼（5楼→2楼）",
       "campus": "狮子山校区",
-      "location": "11",
-      "tags": [],
+      "expectedTime": "2026-07-02",
+      "tags": [
+        "搬家",
+        "搬运",
+        "体力活"
+      ],
       "images": [],
-      "publisherId": "EtPGa9UbyyQ",
-      "publisherName": "1",
-      "status": "active",
-      "viewCount": 0,
-      "favoriteCount": 0,
-      "targetCount": 12,
-      "currentCount": 1,
-      "deadline": "2026-07-01T07:29:00.000Z",
-      "createdAt": "2026-06-28T07:29:19.674Z",
-      "updatedAt": "2026-06-28T07:29:19.674Z",
-      "id": "9F84xFf09l0"
+      "publisherId": "u2",
+      "publisherName": "小橘子",
+      "status": "open",
+      "viewCount": 201,
+      "favoriteCount": 14,
+      "createdAt": "2026-06-28T10:00:00.000Z",
+      "updatedAt": "2026-06-28T10:00:00.000Z"
+    },
+    {
+      "id": "e6",
+      "title": "代打印毕业论文——急！",
+      "description": "毕业论文终稿需要打印装订3份，明天就要交了。求帮忙在校内打印店打印并送到教学楼，打印费另付。",
+      "reward": 15,
+      "taskPlace": "校内打印店 → 教学楼B座",
+      "campus": "狮子山校区",
+      "expectedTime": "2026-06-29",
+      "tags": [
+        "打印",
+        "论文",
+        "急单"
+      ],
+      "images": [],
+      "publisherId": "u1",
+      "publisherName": "校园用户",
+      "status": "open",
+      "viewCount": 179,
+      "favoriteCount": 9,
+      "createdAt": "2026-06-28T15:00:00.000Z",
+      "updatedAt": "2026-06-28T15:00:00.000Z"
     }
   ],
   "favorites": [
     {
       "id": "f1",
       "userId": "u1",
-      "itemId": "i1",
+      "itemId": "t1",
+      "collection": "trades",
       "createdAt": "2026-06-25T12:00:00.000Z"
     },
     {
       "id": "f2",
       "userId": "u1",
-      "itemId": "i3",
+      "itemId": "t3",
+      "collection": "trades",
       "createdAt": "2026-06-26T15:30:00.000Z"
+    },
+    {
+      "id": "f3",
+      "userId": "u2",
+      "itemId": "gb2",
+      "collection": "groupBuys",
+      "createdAt": "2026-06-23T10:00:00.000Z"
+    },
+    {
+      "id": "f4",
+      "userId": "u3",
+      "itemId": "e2",
+      "collection": "errands",
+      "createdAt": "2026-06-27T09:00:00.000Z"
     }
   ],
   "conversations": [
     {
       "id": "c1",
-      "itemId": "i1",
+      "itemId": "t1",
+      "collection": "trades",
       "buyerId": "u1",
       "publisherId": "u1",
       "lastMessage": "你好，这款电脑还在吗？",
@@ -437,6 +700,18 @@
       "updatedAt": "2026-06-25T12:30:00.000Z",
       "itemTitle": "二手笔记本电脑 ThinkPad X1",
       "otherUserName": "校园用户"
+    },
+    {
+      "itemId": "gb4",
+      "collection": "groupBuys",
+      "buyerId": "l6gQpGcKzdQ",
+      "publisherId": "u2",
+      "lastMessage": "",
+      "unreadCount": 0,
+      "updatedAt": "2026-06-29T03:18:05.454Z",
+      "itemTitle": "健身房月卡拼团",
+      "otherUserName": "小橘子",
+      "id": "xUCfwTpl_t4"
     }
   ],
   "messages": [

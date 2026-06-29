@@ -4,7 +4,7 @@ import { ItemTypeLabels } from '@/types'
 
 defineProps<{ type: ItemType }>()
 
-const bg: Record<ItemType, string> = { secondhand: '#8b6914', lostfound: '#2d5a27', groupbuy: '#5b5ea6', errand: '#6b705c' }
+const bg: Record<ItemType, string> = { trades: '#8b6914', lostFounds: '#2d5a27', groupBuys: '#5b5ea6', errands: '#6b705c' }
 </script>
 
 <template>

@@ -15,7 +15,7 @@ const sortBy = ref<'createdAt' | 'viewCount' | 'price'>('createdAt')
 
 const types = Object.entries(ItemTypeLabels) as [ItemType, string][]
 const statuses = Object.entries(ItemStatusLabels) as [ItemStatus, string][]
-const campuses = ['主校区', '东校区', '西校区']
+const campuses = ['狮子山校区', '成龙校区', '遂宁校区']
 
 function emitSearch() {
   emit('search', {

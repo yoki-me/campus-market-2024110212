@@ -6,10 +6,10 @@ defineProps<{ item: CampusItem }>()
 const emit = defineEmits<{ click: [item: CampusItem]; toggleFav: [item: CampusItem] }>()
 
 const typeStyle: Record<string, string> = {
-  secondhand: 'var(--c-amber)',
-  lostfound: 'var(--c-green)',
-  groupbuy: '#5b5ea6',
-  errand: '#6b705c',
+  trades: 'var(--c-amber)',
+  lostFounds: 'var(--c-green)',
+  groupBuys: '#5b5ea6',
+  errands: '#6b705c',
 }
 
 function fmt(dateStr: string) {
@@ -23,10 +23,10 @@ function fmt(dateStr: string) {
 
 function summary(item: CampusItem): string {
   switch (item.type) {
-    case 'secondhand': return `¥${item.price}`
-    case 'lostfound': return item.lostOrFound === 'lost' ? '寻物' : '招领'
-    case 'groupbuy': return `${item.currentCount}/${item.targetCount}人`
-    case 'errand': return item.reward ? `¥${item.reward}` : '面议'
+    case 'trades': return `¥${item.price}`
+    case 'lostFounds': return item.lostOrFound === 'lost' ? '寻物' : '招领'
+    case 'groupBuys': return `${item.currentCount}/${item.targetCount}人`
+    case 'errands': return item.reward ? `¥${item.reward}` : '面议'
     default: return ''
   }
 }

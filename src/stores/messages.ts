@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Conversation, Message } from '@/types'
+import { getCollectionFromId } from '@/types'
 import { getConversations, getConversationByItemAndUser, createConversation, updateConversation } from '@/api/conversations'
 import { getMessages, sendMessage as sendMessageApi, markAsRead } from '@/api/messages'
 import { useUserStore } from './user'
@@ -48,18 +49,12 @@ export const useMessagesStore = defineStore('messages', () => {
     loading.value = true
     try {
       currentMessages.value = await getMessages(conversationId)
-      currentConversation.value = await getConversationByItemAndUser(
-        '', // 这里我们需要另一种方式获取
-      ).then(
-        () => conversations.value.find((c) => c.id === conversationId) || null,
-      )
       // 获取完整会话信息
       const conv = conversations.value.find((c) => c.id === conversationId)
       if (conv) {
         currentConversation.value = conv
         // 标记已读
         if (conv.unreadCount > 0) {
-          // 标记所有消息已读
           for (const msg of currentMessages.value) {
             if (!msg.read) {
               await markAsRead(msg.id)
@@ -95,7 +90,7 @@ export const useMessagesStore = defineStore('messages', () => {
       unreadCount: 1,
     })
 
-    // 1秒后模拟回复（仅当对方是卖家且消息类型不是 bargain）
+    // 1秒后模拟回复
     if (messageType === 'text') {
       setTimeout(async () => {
         await simulateReply()
@@ -110,7 +105,7 @@ export const useMessagesStore = defineStore('messages', () => {
     if (!currentConversation.value) return
 
     const reply =
-      AUTO_REPLIES[Math.floor(Math.random() * AUTO_REPLIES.length)]
+      AUTO_REPLIES[Math.floor(Math.random() * AUTO_REPLIES.length)] || '好的，收到！'
     const replyMsg = await sendMessageApi({
       conversationId: currentConversation.value.id,
       senderId: currentConversation.value.publisherId,
@@ -137,8 +132,10 @@ export const useMessagesStore = defineStore('messages', () => {
 
     // 获取物品信息
     const item = await getItem(itemId)
+    const collection = getCollectionFromId(itemId)
     const conv = await createConversation({
       itemId,
+      collection,
       buyerId: userStore.userId,
       publisherId,
       lastMessage: '',

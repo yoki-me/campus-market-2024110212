@@ -14,6 +14,26 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue'),
     },
     {
+      path: '/trades',
+      name: 'trades',
+      component: () => import('../views/TradeView.vue'),
+    },
+    {
+      path: '/lostfounds',
+      name: 'lostfounds',
+      component: () => import('../views/LostFoundView.vue'),
+    },
+    {
+      path: '/groupbuys',
+      name: 'groupbuys',
+      component: () => import('../views/GroupBuyView.vue'),
+    },
+    {
+      path: '/errands',
+      name: 'errands',
+      component: () => import('../views/ErrandView.vue'),
+    },
+    {
       path: '/list',
       name: 'list',
       component: () => import('../views/ListView.vue'),

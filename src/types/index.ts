@@ -10,25 +10,37 @@ export interface User {
   createdAt: string
 }
 
-// ============ 校园信息类型 ============
-export type ItemType = 'secondhand' | 'lostfound' | 'groupbuy' | 'errand'
+// ============ 校园信息类型（对应 db.json 中的四个集合） ============
+export type ItemType = 'trades' | 'lostFounds' | 'groupBuys' | 'errands'
 
 export const ItemTypeLabels: Record<ItemType, string> = {
-  secondhand: '二手交易',
-  lostfound: '失物招领',
-  groupbuy: '拼单搭子',
-  errand: '跑腿委托',
+  trades: '二手交易',
+  lostFounds: '失物招领',
+  groupBuys: '拼单搭子',
+  errands: '跑腿委托',
 }
 
-export type ItemStatus = 'active' | 'in_progress' | 'completed' | 'closed' | 'found' | 'claimed'
+/** 映射 ItemType 到 db.json 中的集合名（二者一致） */
+export const CollectionNames: Record<ItemType, string> = {
+  trades: 'trades',
+  lostFounds: 'lostFounds',
+  groupBuys: 'groupBuys',
+  errands: 'errands',
+}
+
+/** 根据 id 前缀推断所属集合 */
+export function getCollectionFromId(id: string): ItemType {
+  if (id.startsWith('lf')) return 'lostFounds'
+  if (id.startsWith('gb')) return 'groupBuys'
+  if (id.startsWith('e')) return 'errands'
+  return 'trades' // 't' 前缀或未知回退
+}
+
+export type ItemStatus = 'open' | 'closed'
 
 export const ItemStatusLabels: Record<ItemStatus, string> = {
-  active: '进行中',
-  in_progress: '处理中',
-  completed: '已完成',
+  open: '进行中',
   closed: '已关闭',
-  found: '已找回',
-  claimed: '已认领',
 }
 
 export interface CampusItem {
@@ -49,6 +61,7 @@ export interface CampusItem {
   updatedAt: string
   // 二手交易专属
   price?: number
+  originalPrice?: number
   condition?: string
   allowBargain?: boolean
   // 失物招领专属
@@ -70,6 +83,7 @@ export interface Favorite {
   id: string
   userId: string
   itemId: string
+  collection: ItemType
   createdAt: string
   item?: CampusItem
 }
@@ -78,6 +92,7 @@ export interface Favorite {
 export interface Conversation {
   id: string
   itemId: string
+  collection: ItemType
   buyerId: string
   publisherId: string
   lastMessage: string

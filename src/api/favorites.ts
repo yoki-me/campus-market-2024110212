@@ -1,32 +1,52 @@
-import { get, post, del } from './index'
-import type { Favorite, CampusItem } from '@/types'
+import http from './http'
+import type { Favorite, CampusItem, ItemType } from '@/types'
+import { CollectionNames, getCollectionFromId } from '@/types'
 
-export function getFavorites(userId: string): Promise<Favorite[]> {
-  return get<Favorite[]>(`/favorites?userId=${userId}`)
+export async function getFavorites(userId: string): Promise<Favorite[]> {
+  const res = await http.get<Favorite[]>(`/favorites?userId=${userId}`)
+  return res.data
 }
 
-export function getFavoriteByUserAndItem(userId: string, itemId: string): Promise<Favorite[]> {
-  return get<Favorite[]>(`/favorites?userId=${userId}&itemId=${itemId}`)
+export async function getFavoriteByUserAndItem(
+  userId: string,
+  itemId: string,
+): Promise<Favorite[]> {
+  const res = await http.get<Favorite[]>(`/favorites?userId=${userId}&itemId=${itemId}`)
+  return res.data
 }
 
-export function addFavorite(favorite: Omit<Favorite, 'id' | 'createdAt'>): Promise<Favorite> {
-  return post<Favorite>('/favorites', {
+export async function addFavorite(
+  favorite: Omit<Favorite, 'id' | 'createdAt'>,
+): Promise<Favorite> {
+  const res = await http.post<Favorite>('/favorites', {
     ...favorite,
     createdAt: new Date().toISOString(),
   })
+  return res.data
 }
 
-export function removeFavorite(id: string): Promise<void> {
-  return del(`/favorites/${id}`)
+export async function removeFavorite(id: string): Promise<void> {
+  await http.delete(`/favorites/${id}`)
 }
 
-// 获取收藏列表并附带 item 信息
-export async function getFavoritesWithItems(userId: string): Promise<(Favorite & { item: CampusItem })[]> {
-  const favorites = await getFavorites(userId)
+export async function getFavoritesWithItems(
+  userId: string,
+): Promise<(Favorite & { item: CampusItem })[]> {
+  const favRes = await http.get<Favorite[]>(`/favorites?userId=${userId}`)
+  const favorites = favRes.data
   const results: (Favorite & { item: CampusItem })[] = []
+
   for (const fav of favorites) {
-    const item = await get<CampusItem>(`/items/${fav.itemId}`)
-    results.push({ ...fav, item })
+    const col: ItemType = fav.collection || getCollectionFromId(fav.itemId)
+    const raw = await http.get<Record<string, unknown>>(
+      `/${CollectionNames[col]}/${fav.itemId}`,
+    )
+    const item: Record<string, unknown> = { ...raw.data, type: col }
+    if (col === 'lostFounds' && 'type' in item) {
+      item.lostOrFound = item.type as string
+      item.type = col
+    }
+    results.push({ ...fav, item: item as unknown as CampusItem })
   }
   return results
 }

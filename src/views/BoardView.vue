@@ -14,13 +14,13 @@ onMounted(async () => {
 
 const statCards = computed(() => [
   { label: '信息总数', val: itemsStore.items.length },
-  { label: '进行中', val: itemsStore.items.filter(i => ['active','in_progress'].includes(i.status)).length },
-  { label: '已完成', val: itemsStore.items.filter(i => ['completed','found','claimed'].includes(i.status)).length },
-  { label: '总浏览',   val: itemsStore.items.reduce((s,i) => s + i.viewCount, 0) },
+  { label: '进行中', val: itemsStore.items.filter(i => i.status === 'open').length },
+  { label: '已关闭', val: itemsStore.items.filter(i => i.status === 'closed').length },
+  { label: '总浏览', val: itemsStore.items.reduce((s,i) => s + i.viewCount, 0) },
 ])
 
-const typeLabels: Record<string,string> = { secondhand:'二手交易', lostfound:'失物招领', groupbuy:'拼单搭子', errand:'跑腿委托' }
-const typeColors: Record<string,string> = { secondhand:'#8b6914', lostfound:'#2d5a27', groupbuy:'#5b5ea6', errand:'#6b705c' }
+const typeLabels: Record<string,string> = { trades:'二手交易', lostFounds:'失物招领', groupBuys:'拼单搭子', errands:'跑腿委托' }
+const typeColors: Record<string,string> = { trades:'#8b6914', lostFounds:'#2d5a27', groupBuys:'#5b5ea6', errands:'#6b705c' }
 
 const typeData = computed(() => {
   const m: Record<string,number> = {}
@@ -36,8 +36,8 @@ const campusData = computed(() => {
   return Object.entries(m).map(([k,v]) => ({ name: k, count: v, pct: Math.round(v/max*100) }))
 })
 
-const statusLabels: Record<string,string> = { active:'进行中', in_progress:'处理中', completed:'已完成', closed:'已关闭', found:'已找回', claimed:'已认领' }
-const statusColors: Record<string,string> = { active:'#2d5a27', in_progress:'#8b6914', completed:'#1c1c1c', closed:'#8c8c8c', found:'#5b5ea6', claimed:'#6b705c' }
+const statusLabels: Record<string,string> = { open:'进行中', closed:'已关闭' }
+const statusColors: Record<string,string> = { open:'#2d5a27', closed:'#8c8c8c' }
 
 const statusData = computed(() => {
   const m: Record<string,number> = {}

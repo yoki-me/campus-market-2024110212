@@ -1,32 +1,39 @@
-import { get, post, patch } from './index'
+import http from './http'
 import type { Conversation } from '@/types'
 
-export function getConversations(userId: string): Promise<Conversation[]> {
-  return get<Conversation[]>(`/conversations?buyerId=${userId}&_sort=updatedAt&_order=desc`)
+export async function getConversations(userId: string): Promise<Conversation[]> {
+  const res = await http.get<Conversation[]>(
+    `/conversations?buyerId=${userId}&_sort=updatedAt&_order=desc`,
+  )
+  return res.data
 }
 
-export function getConversation(id: string): Promise<Conversation> {
-  return get<Conversation>(`/conversations/${id}`)
+export async function getConversation(id: string): Promise<Conversation> {
+  const res = await http.get<Conversation>(`/conversations/${id}`)
+  return res.data
 }
 
-export function getConversationByItemAndUser(
+export async function getConversationByItemAndUser(
   itemId: string,
   buyerId: string,
 ): Promise<Conversation[]> {
-  return get<Conversation[]>(
+  const res = await http.get<Conversation[]>(
     `/conversations?itemId=${itemId}&buyerId=${buyerId}`,
   )
+  return res.data
 }
 
-export function createConversation(
+export async function createConversation(
   conversation: Omit<Conversation, 'id'>,
 ): Promise<Conversation> {
-  return post<Conversation>('/conversations', conversation)
+  const res = await http.post<Conversation>('/conversations', conversation)
+  return res.data
 }
 
-export function updateConversation(
+export async function updateConversation(
   id: string,
   conversation: Partial<Conversation>,
 ): Promise<Conversation> {
-  return patch<Conversation>(`/conversations/${id}`, conversation)
+  const res = await http.patch<Conversation>(`/conversations/${id}`, conversation)
+  return res.data
 }

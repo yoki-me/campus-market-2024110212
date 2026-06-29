@@ -16,7 +16,7 @@ const tab = ref<'published'|'favorites'>('published')
 const loading = ref(true)
 const myItems = ref<CampusItem[]>([])
 
-const statusOpts: ItemStatus[] = ['active','in_progress','completed','closed','found','claimed']
+const statusOpts: ItemStatus[] = ['open', 'closed']
 
 onMounted(async () => {
   if (!userStore.isLoggedIn) { router.push('/login'); return }
@@ -30,7 +30,7 @@ onMounted(async () => {
 async function updateStatus(item: CampusItem, status: ItemStatus) {
   await itemsStore.updateStatus(item.id, status)
   const idx = myItems.value.findIndex(i => i.id === item.id)
-  if (idx !== -1) myItems.value[idx].status = status
+  if (idx !== -1 && myItems.value[idx]) myItems.value[idx]!.status = status
 }
 async function removeFav(id: string) { await favoritesStore.toggleFavorite(id); await favoritesStore.fetchFavoritesWithItems() }
 function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-CN') }

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Favorite, CampusItem } from '@/types'
+import { getCollectionFromId } from '@/types'
 import {
   getFavorites,
   getFavoriteByUserAndItem,
@@ -8,7 +9,6 @@ import {
   removeFavorite,
   getFavoritesWithItems,
 } from '@/api/favorites'
-import { updateItem } from '@/api/items'
 import { useUserStore } from './user'
 
 export const useFavoritesStore = defineStore('favorites', () => {
@@ -52,15 +52,16 @@ export const useFavoritesStore = defineStore('favorites', () => {
     if (!userStore.userId) return false
 
     const existing = await getFavoriteByUserAndItem(userStore.userId, itemId)
-    if (existing.length > 0) {
-      await removeFavorite(existing[0].id)
+    const first = existing[0]
+    if (first) {
+      await removeFavorite(first.id)
       favorites.value = favorites.value.filter((f) => f.itemId !== itemId)
-      // 更新 items 中的 favoriteCount
       return false
     } else {
       const fav = await addFavorite({
         userId: userStore.userId,
         itemId,
+        collection: getCollectionFromId(itemId),
       })
       favorites.value.push(fav)
       return true

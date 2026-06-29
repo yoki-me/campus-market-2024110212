@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useItemsStore } from '@/stores/items'
 import { useUserStore } from '@/stores/user'
@@ -10,7 +10,7 @@ const router = useRouter()
 const itemsStore = useItemsStore()
 const userStore = useUserStore()
 
-const sel = ref<ItemType>('secondhand')
+const sel = ref<ItemType>('trades')
 const title = ref('')
 const desc = ref('')
 const campus = ref('狮子山校区')
@@ -31,17 +31,17 @@ const loading = ref(false)
 const err = ref('')
 
 const types: { key: ItemType; label: string }[] = [
-  { key: 'secondhand', label: '二手交易' },
-  { key: 'lostfound', label: '失物招领' },
-  { key: 'groupbuy', label: '拼单搭子' },
-  { key: 'errand', label: '跑腿委托' },
+  { key: 'trades', label: '二手交易' },
+  { key: 'lostFounds', label: '失物招领' },
+  { key: 'groupBuys', label: '拼单搭子' },
+  { key: 'errands', label: '跑腿委托' },
 ]
 
 const tips: Record<ItemType, string[]> = {
-  secondhand: ['如实描述商品成色和瑕疵','建议在校园公共场所交易','贵重物品当面验货','保留聊天记录作为凭证'],
-  lostfound: ['详细描述物品特征','注明丢失/拾获的时间和地点','保护个人联系方式隐私','物品找回后及时更新状态'],
-  groupbuy: ['明确目标人数和截止时间','注明集合地点','截止时间后自动结束','建议统一收费方式'],
-  errand: ['详细描述任务内容和要求','合理设定酬劳金额','注明期望完成时间','贵重物品当面验收'],
+  trades: ['如实描述商品成色和瑕疵','建议在校园公共场所交易','贵重物品当面验货','保留聊天记录作为凭证'],
+  lostFounds: ['详细描述物品特征','注明丢失/拾获的时间和地点','保护个人联系方式隐私','物品找回后及时更新状态'],
+  groupBuys: ['明确目标人数和截止时间','注明集合地点','截止时间后自动结束','建议统一收费方式'],
+  errands: ['详细描述任务内容和要求','合理设定酬劳金额','注明期望完成时间','贵重物品当面验收'],
 }
 
 async function submit() {
@@ -49,16 +49,16 @@ async function submit() {
   if (!title.value.trim()) { err.value = '请输入标题'; return }
   if (!desc.value.trim()) { err.value = '请输入描述'; return }
   if (!location.value.trim()) { err.value = '请输入地点'; return }
-  if (sel.value === 'secondhand' && (!price.value || price.value <= 0)) { err.value = '请输入有效价格'; return }
-  if (sel.value === 'lostfound' && !eventTime.value) { err.value = '请选择事件时间'; return }
-  if (sel.value === 'groupbuy') { if (!targetCount.value || targetCount.value < 2) { err.value = '目标人数至少为2'; return }; if (!deadline.value) { err.value = '请选择截止时间'; return } }
+  if (sel.value === 'trades' && (!price.value || price.value <= 0)) { err.value = '请输入有效价格'; return }
+  if (sel.value === 'lostFounds' && !eventTime.value) { err.value = '请选择事件时间'; return }
+  if (sel.value === 'groupBuys') { if (!targetCount.value || targetCount.value < 2) { err.value = '目标人数至少为2'; return }; if (!deadline.value) { err.value = '请选择截止时间'; return } }
   loading.value = true
   const tags = tagsInput.value.split(/[,，\s]+/).filter(Boolean)
   try {
-    const base = { type: sel.value, title: title.value.trim(), description: desc.value.trim(), campus: campus.value, location: location.value.trim(), tags, images: [], publisherId: userStore.userId, publisherName: userStore.currentUser?.nickname || '匿名用户', status: 'active' as const, viewCount: 0, favoriteCount: 0 }
-    if (sel.value === 'secondhand') await itemsStore.publish({ ...base, price: price.value, condition: condition.value, allowBargain: allowBargain.value })
-    else if (sel.value === 'lostfound') await itemsStore.publish({ ...base, lostOrFound: lostOrFound.value, eventTime: eventTime.value, itemFeature: itemFeature.value || undefined })
-    else if (sel.value === 'groupbuy') await itemsStore.publish({ ...base, targetCount: targetCount.value, currentCount: 1, deadline: new Date(deadline.value).toISOString() })
+    const base = { type: sel.value, title: title.value.trim(), description: desc.value.trim(), campus: campus.value, location: location.value.trim(), tags, images: [], publisherId: userStore.userId, publisherName: userStore.currentUser?.nickname || '匿名用户', status: 'open' as const, viewCount: 0, favoriteCount: 0 }
+    if (sel.value === 'trades') await itemsStore.publish({ ...base, price: price.value, condition: condition.value, allowBargain: allowBargain.value })
+    else if (sel.value === 'lostFounds') await itemsStore.publish({ ...base, lostOrFound: lostOrFound.value, eventTime: eventTime.value, itemFeature: itemFeature.value || undefined })
+    else if (sel.value === 'groupBuys') await itemsStore.publish({ ...base, targetCount: targetCount.value, currentCount: 1, deadline: new Date(deadline.value).toISOString() })
     else await itemsStore.publish({ ...base, reward: reward.value, taskPlace: taskPlace.value || undefined, expectedTime: expectedTime.value || undefined })
     router.push('/list')
   } catch { err.value = '发布失败，请重试' }
@@ -96,27 +96,27 @@ async function submit() {
           <div class="fg"><label class="lbl">图片</label><div class="upload-box"><el-icon :size="20"><Upload /></el-icon><span>点击或拖拽上传图片</span><span style="font-size:var(--fs-xs);color:var(--c-text-3)">支持 JPG、PNG，单张不超过 5MB</span></div></div>
 
           <!-- Type-specific -->
-          <template v-if="sel === 'secondhand'">
+          <template v-if="sel === 'trades'">
             <div class="fg-row2">
               <div class="fg"><label class="lbl">价格 <span class="req">*</span></label><div class="price-wrap"><span class="px">¥</span><input v-model.number="price" type="number" class="input" style="border-radius:0 var(--r-sm) var(--r-sm) 0" placeholder="0.00" min="0" step="0.01" /></div></div>
               <div class="fg"><label class="lbl">成色</label><select v-model="condition" class="input"><option>全新</option><option>几乎全新</option><option>9成新</option><option>8成新</option><option>7成新</option></select></div>
             </div>
             <label class="check-lbl"><input v-model="allowBargain" type="checkbox" /> 允许砍价</label>
           </template>
-          <template v-if="sel === 'lostfound'">
+          <template v-if="sel === 'lostFounds'">
             <div class="fg-row2">
               <div class="fg"><label class="lbl">类型 <span class="req">*</span></label><select v-model="lostOrFound" class="input"><option value="lost">寻物启事</option><option value="found">失物招领</option></select></div>
               <div class="fg"><label class="lbl">事件时间 <span class="req">*</span></label><input v-model="eventTime" type="date" class="input" /></div>
             </div>
             <div class="fg"><label class="lbl">物品特征</label><input v-model="itemFeature" class="input" placeholder="如：蓝色贴纸标记、品牌型号" /></div>
           </template>
-          <template v-if="sel === 'groupbuy'">
+          <template v-if="sel === 'groupBuys'">
             <div class="fg-row2">
               <div class="fg"><label class="lbl">目标人数 <span class="req">*</span></label><input v-model.number="targetCount" type="number" class="input" placeholder="最少2人" min="2" /></div>
               <div class="fg"><label class="lbl">截止时间 <span class="req">*</span></label><input v-model="deadline" type="datetime-local" class="input" /></div>
             </div>
           </template>
-          <template v-if="sel === 'errand'">
+          <template v-if="sel === 'errands'">
             <div class="fg-row2">
               <div class="fg"><label class="lbl">酬劳</label><div class="price-wrap"><span class="px">¥</span><input v-model.number="reward" type="number" class="input" style="border-radius:0 var(--r-sm) var(--r-sm) 0" placeholder="0.00" min="0" /></div></div>
               <div class="fg"><label class="lbl">期望时间</label><input v-model="expectedTime" type="date" class="input" /></div>

@@ -69,7 +69,6 @@ export const useItemsStore = defineStore('items', () => {
     if (currentItem.value?.id === id) {
       currentItem.value = updated
     }
-    // 更新列表中的数据
     const index = items.value.findIndex((i) => i.id === id)
     if (index !== -1) {
       items.value[index] = updated
@@ -81,8 +80,7 @@ export const useItemsStore = defineStore('items', () => {
   async function fetchByUser(userId: string) {
     loading.value = true
     try {
-      return await getItems()
-        .then((all) => all.filter((i) => i.publisherId === userId))
+      return await getItems().then((all) => all.filter((i) => i.publisherId === userId))
     } finally {
       loading.value = false
     }

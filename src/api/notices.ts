@@ -1,6 +1,7 @@
-import { get } from './index'
+import http from './http'
 import type { Notice } from '@/types'
 
-export function getNotices(): Promise<Notice[]> {
-  return get<Notice[]>('/notices')
+export async function getNotices(): Promise<Notice[]> {
+  const res = await http.get<Notice[]>('/notices')
+  return res.data
 }
