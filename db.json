@@ -197,7 +197,7 @@
       "publisherName": "图书馆常客",
       "status": "open",
       "allowBargain": true,
-      "viewCount": 189,
+      "viewCount": 190,
       "favoriteCount": 11,
       "createdAt": "2026-06-25T16:00:00.000Z",
       "updatedAt": "2026-06-25T16:00:00.000Z"
@@ -227,6 +227,26 @@
       "favoriteCount": 26,
       "createdAt": "2026-06-22T11:00:00.000Z",
       "updatedAt": "2026-06-22T11:00:00.000Z"
+    },
+    {
+      "type": "trades",
+      "title": "w",
+      "description": "w",
+      "campus": "狮子山校区",
+      "location": "1",
+      "tags": [],
+      "images": [],
+      "publisherId": "l6gQpGcKzdQ",
+      "publisherName": "w",
+      "status": "closed",
+      "viewCount": 2,
+      "favoriteCount": 0,
+      "price": 1,
+      "condition": "9成新",
+      "allowBargain": true,
+      "id": "KJnlH_ak7YI",
+      "createdAt": "2026-06-29T05:02:06.556Z",
+      "updatedAt": "2026-06-29T05:02:23.342Z"
     }
   ],
   "lostFounds": [
@@ -273,7 +293,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 67,
+      "viewCount": 68,
       "favoriteCount": 5,
       "createdAt": "2026-06-26T09:00:00.000Z",
       "updatedAt": "2026-06-26T09:00:00.000Z"
@@ -512,7 +532,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "open",
-      "viewCount": 98,
+      "viewCount": 100,
       "favoriteCount": 7,
       "createdAt": "2026-06-28T14:00:00.000Z",
       "updatedAt": "2026-06-28T14:00:00.000Z"
@@ -538,7 +558,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "closed",
-      "viewCount": 95,
+      "viewCount": 96,
       "favoriteCount": 4,
       "createdAt": "2026-06-27T10:00:00.000Z",
       "updatedAt": "2026-06-28T16:00:00.000Z"
@@ -630,7 +650,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 201,
+      "viewCount": 202,
       "favoriteCount": 14,
       "createdAt": "2026-06-28T10:00:00.000Z",
       "updatedAt": "2026-06-28T10:00:00.000Z"
@@ -639,7 +659,7 @@
       "id": "e6",
       "title": "代打印毕业论文——急！",
       "description": "毕业论文终稿需要打印装订3份，明天就要交了。求帮忙在校内打印店打印并送到教学楼，打印费另付。",
-      "reward": 15,
+      "reward": 20,
       "taskPlace": "校内打印店 → 教学楼B座",
       "campus": "狮子山校区",
       "expectedTime": "2026-06-29",
@@ -652,8 +672,8 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "open",
-      "viewCount": 179,
-      "favoriteCount": 9,
+      "viewCount": 184,
+      "favoriteCount": 15,
       "createdAt": "2026-06-28T15:00:00.000Z",
       "updatedAt": "2026-06-28T15:00:00.000Z"
     }
