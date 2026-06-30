@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getGroupBuys } from '@/api/groupBuy'
-import type { GroupBuyItem } from '@/api/groupBuy'
+import { getGroupBuys, type GroupBuyItem } from '@/api/groupBuy'
 import type { CampusItem } from '@/types'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
@@ -24,7 +23,7 @@ onMounted(async () => {
 })
 
 function isFav(id: string) { return favoritesStore.favoriteIds.has(id) }
-async function toggle(id: string) { await favoritesStore.toggleFavorite(id) }
+async function toggle(id: string) { await favoritesStore.toggleFavorite(id, 'groupBuys') }
 </script>
 
 <template>
@@ -42,7 +41,7 @@ async function toggle(id: string) { await favoritesStore.toggleFavorite(id) }
     </div>
     <div v-else class="items-grid">
       <div v-for="item in items" :key="item.id" style="position:relative">
-        <ItemCard :item="item" @click="router.push(`/detail/${item.id}`)" />
+        <ItemCard :item="item" @click="router.push(`/detail/groupBuys/${item.id}`)" />
         <button class="fav-dot" :class="{ on: isFav(item.id) }" @click.stop="toggle(item.id)">
           {{ isFav(item.id) ? '★' : '☆' }}
         </button>

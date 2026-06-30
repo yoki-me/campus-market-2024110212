@@ -125,7 +125,7 @@ const topItems = computed(() =>
         <h3>热门信息 TOP 5</h3>
         <div v-if="!topItems.length" class="empty-note">暂无数据</div>
         <div v-else class="top-list">
-          <div v-for="(item,idx) in topItems" :key="item.id" class="top-row" @click="router.push(`/detail/${item.id}`)">
+          <div v-for="(item,idx) in topItems" :key="item.id" class="top-row" @click="router.push(`/detail/${item.type}/${item.id}`)">
             <span class="top-num" :class="{ top: idx < 3 }">{{ idx + 1 }}</span>
             <span class="top-title">{{ item.title }}</span>
             <span class="top-views">{{ item.viewCount }} 次</span>

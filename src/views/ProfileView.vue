@@ -28,11 +28,11 @@ onMounted(async () => {
 })
 
 async function updateStatus(item: CampusItem, status: ItemStatus) {
-  await itemsStore.updateStatus(item.id, status)
+  await itemsStore.updateStatus(item.type, item.id, status)
   const idx = myItems.value.findIndex(i => i.id === item.id)
   if (idx !== -1 && myItems.value[idx]) myItems.value[idx]!.status = status
 }
-async function removeFav(id: string) { await favoritesStore.toggleFavorite(id); await favoritesStore.fetchFavoritesWithItems() }
+async function removeFav(item: CampusItem) { await favoritesStore.toggleFavorite(item.id, item.type); await favoritesStore.fetchFavoritesWithItems() }
 function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-CN') }
 </script>
 
@@ -78,7 +78,7 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-
               <thead><tr><th>标题</th><th>类型</th><th>状态</th><th>时间</th><th>更新状态</th></tr></thead>
               <tbody>
                 <tr v-for="item in myItems" :key="item.id">
-                  <td class="td-title" @click="router.push(`/detail/${item.id}`)">{{ item.title }}</td>
+                  <td class="td-title" @click="router.push(`/detail/${item.type}/${item.id}`)">{{ item.title }}</td>
                   <td>{{ ItemTypeLabels[item.type] }}</td>
                   <td><span class="st-badge">{{ ItemStatusLabels[item.status] }}</span></td>
                   <td class="td-time">{{ fmt(item.createdAt) }}</td>
@@ -103,10 +103,10 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-
               <thead><tr><th>标题</th><th>类型</th><th>状态</th><th>操作</th></tr></thead>
               <tbody>
                 <tr v-for="fav in favoritesStore.favoriteItems" :key="fav.id">
-                  <td class="td-title" @click="router.push(`/detail/${fav.item.id}`)">{{ fav.item.title }}</td>
+                  <td class="td-title" @click="router.push(`/detail/${fav.item.type}/${fav.item.id}`)">{{ fav.item.title }}</td>
                   <td>{{ ItemTypeLabels[fav.item.type] }}</td>
                   <td><span class="st-badge">{{ ItemStatusLabels[fav.item.status] }}</span></td>
-                  <td><button class="btn btn--danger btn--sm" @click="removeFav(fav.item.id)">取消收藏</button></td>
+                  <td><button class="btn btn--danger btn--sm" @click="removeFav(fav.item)">取消收藏</button></td>
                 </tr>
               </tbody>
             </table>

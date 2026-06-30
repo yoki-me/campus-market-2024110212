@@ -5,7 +5,7 @@ import { useItemsStore } from '@/stores/items'
 import { useFavoritesStore } from '@/stores/favorites'
 import { useMessagesStore } from '@/stores/messages'
 import { useUserStore } from '@/stores/user'
-import type { CampusItem } from '@/types'
+import type { CampusItem, ItemType } from '@/types'
 import { ItemTypeLabels, ItemStatusLabels } from '@/types'
 import { Star, ChatDotRound, Coin } from '@element-plus/icons-vue'
 
@@ -24,18 +24,19 @@ const bargainReply = ref('')
 const bargainLoading = ref(false)
 
 const itemId = computed(() => route.params.id as string)
+const itemType = computed(() => route.params.type as ItemType)
 const isFav = computed(() => favoritesStore.isFavorited(itemId.value))
 
 onMounted(async () => {
   loading.value = true
-  try { const r = await itemsStore.fetchItem(itemId.value); item.value = r; await favoritesStore.fetchFavorites() }
+  try { const r = await itemsStore.fetchItem(itemType.value, itemId.value); item.value = r; await favoritesStore.fetchFavorites() }
   finally { loading.value = false }
 })
 
-async function toggleFav() { if (item.value) await favoritesStore.toggleFavorite(item.value.id) }
+async function toggleFav() { if (item.value) await favoritesStore.toggleFavorite(item.value.id, item.value.type) }
 async function goChat() {
   if (!item.value) return
-  const c = await messagesStore.openConversation(item.value.id, item.value.publisherId)
+  const c = await messagesStore.openConversation(item.value.id, item.value.publisherId, item.value.type)
   router.push(`/chat/${c.id}`)
 }
 function submitBargain() {

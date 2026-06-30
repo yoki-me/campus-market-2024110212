@@ -39,7 +39,7 @@ const router = createRouter({
       component: () => import('../views/ListView.vue'),
     },
     {
-      path: '/detail/:id',
+      path: '/detail/:type/:id',
       name: 'detail',
       component: () => import('../views/DetailView.vue'),
     },

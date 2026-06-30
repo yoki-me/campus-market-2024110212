@@ -2,8 +2,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getTrades } from '@/api/trade'
-import type { TradeItem } from '@/api/trade'
+import { getTrades, type TradeItem } from '@/api/trade'
 import type { CampusItem } from '@/types'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
@@ -25,7 +24,7 @@ onMounted(async () => {
 })
 
 function isFav(id: string) { return favoritesStore.favoriteIds.has(id) }
-async function toggle(id: string) { await favoritesStore.toggleFavorite(id) }
+async function toggle(id: string) { await favoritesStore.toggleFavorite(id, 'trades') }
 </script>
 
 <template>
@@ -39,11 +38,13 @@ async function toggle(id: string) { await favoritesStore.toggleFavorite(id) }
     <div v-if="loading" class="loading-box"><div class="spinner"></div></div>
     <div v-else-if="!items.length" class="empty-box">
       <EmptyState text="暂无二手交易信息" />
+
+
       <RouterLink to="/publish" class="btn btn--primary btn--sm">发布信息</RouterLink>
     </div>
     <div v-else class="items-grid">
       <div v-for="item in items" :key="item.id" style="position:relative">
-        <ItemCard :item="item" @click="router.push(`/detail/${item.id}`)" />
+        <ItemCard :item="item" @click="router.push(`/detail/trades/${item.id}`)" />
         <button class="fav-dot" :class="{ on: isFav(item.id) }" @click.stop="toggle(item.id)">
           {{ isFav(item.id) ? '★' : '☆' }}
         </button>

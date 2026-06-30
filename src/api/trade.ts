@@ -1,4 +1,4 @@
-import http from './http'
+import http, { nextId } from './http'
 
 export interface TradeItem {
   id: string
@@ -31,10 +31,12 @@ export function getTradeById(id: string) {
   return http.get<TradeItem>(`/trades/${id}`)
 }
 
-/** 新增二手交易 */
-export function createTrade(data: Omit<TradeItem, 'id' | 'createdAt' | 'updatedAt'>) {
+/** 新增二手交易（生成带前缀的顺序 id） */
+export async function createTrade(data: Omit<TradeItem, 'id' | 'createdAt' | 'updatedAt'>) {
+  const id = await nextId('trades', 't')
   return http.post<TradeItem>('/trades', {
     ...data,
+    id,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   })

@@ -132,7 +132,7 @@ function summary(item: CampusItem): string {
             <div v-if="loading" class="loading-box"><div class="spinner"></div></div>
             <div v-else-if="!itemsStore.items.length" class="empty-box">暂无信息</div>
             <div v-else class="latest-grid">
-              <div v-for="item in itemsStore.items.slice(0,6)" :key="item.id" class="latest-card card" @click="router.push(`/detail/${item.id}`)">
+              <div v-for="item in itemsStore.items.slice(0,6)" :key="item.id" class="latest-card card" @click="router.push(`/detail/${item.type}/${item.id}`)">
                 <div class="lc-img" :style="{ backgroundImage: item.images?.[0] ? `url(${item.images[0]})` : 'none' }"></div>
                 <div class="lc-body">
                   <h3>{{ item.title }}</h3>

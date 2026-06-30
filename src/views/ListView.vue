@@ -18,26 +18,90 @@ const keyword = ref('')
 const selType = ref<ItemType | ''>('')
 const selCampus = ref('')
 const selStatus = ref<ItemStatus | ''>('')
-const sort = ref<'createdAt'|'viewCount'|'price'>('createdAt')
-const campuses = ['狮子山校区','成龙校区','遂宁校区']
+const sort = ref<'createdAt' | 'viewCount' | 'price'>('createdAt')
+const campuses = ['狮子山校区', '成龙校区', '遂宁校区']
+
+// 搜索防抖
+let timer: ReturnType<typeof setTimeout> | null = null
+const DEBOUNCE_MS = 300
 
 onMounted(async () => {
   const tp = route.query.type as ItemType | undefined
   if (tp) selType.value = tp
-  loading.value = true
-  try { await apply(); await favoritesStore.fetchFavorites() } finally { loading.value = false }
+  try {
+    await apply()
+    await favoritesStore.fetchFavorites()
+  } finally {
+    loading.value = false
+  }
 })
 
 async function apply() {
-  const f: Partial<ItemFilters> = { keyword: keyword.value, type: selType.value, campus: selCampus.value, status: selStatus.value, sortBy: sort.value, sortOrder: 'desc' }
-  await itemsStore.fetchItems(f)
+  loading.value = true
+  try {
+    const f: Partial<ItemFilters> = {
+      keyword: keyword.value || undefined,
+      type: selType.value || undefined,
+      campus: selCampus.value || undefined,
+      status: selStatus.value || undefined,
+      sortBy: sort.value,
+      sortOrder: 'desc',
+    }
+    await itemsStore.fetchItems(f)
+  } finally {
+    loading.value = false
+  }
 }
 
-function clearAll() { keyword.value=''; selType.value=''; selCampus.value=''; selStatus.value=''; sort.value='createdAt'; apply() }
-const hasFilters = computed(() => keyword.value || selType.value || selCampus.value || selStatus.value)
+/** 切换类型筛选 */
+function toggleType(t: ItemType) {
+  selType.value = selType.value === t ? '' : t
+  apply()
+}
 
-function isFav(id: string) { return favoritesStore.favoriteIds.has(id) }
-async function toggle(item: CampusItem) { await favoritesStore.toggleFavorite(item.id) }
+/** 切换校区筛选 */
+function toggleCampus(c: string) {
+  selCampus.value = selCampus.value === c ? '' : c
+  apply()
+}
+
+/** 切换状态筛选 */
+function toggleStatus(s: ItemStatus) {
+  selStatus.value = selStatus.value === s ? '' : s
+  apply()
+}
+
+/** 切换排序 */
+function setSort(s: 'createdAt' | 'viewCount' | 'price') {
+  sort.value = s
+  apply()
+}
+
+/** 搜索输入防抖 */
+function onKeywordInput() {
+  if (timer) clearTimeout(timer)
+  timer = setTimeout(apply, DEBOUNCE_MS)
+}
+
+function clearAll() {
+  keyword.value = ''
+  selType.value = ''
+  selCampus.value = ''
+  selStatus.value = ''
+  sort.value = 'createdAt'
+  apply()
+}
+
+const hasFilters = computed(
+  () => !!(keyword.value || selType.value || selCampus.value || selStatus.value),
+)
+
+function isFav(id: string) {
+  return favoritesStore.favoriteIds.has(id)
+}
+async function toggleFav(item: CampusItem) {
+  await favoritesStore.toggleFavorite(item.id, item.type)
+}
 </script>
 
 <template>
@@ -49,23 +113,44 @@ async function toggle(item: CampusItem) { await favoritesStore.toggleFavorite(it
         <div class="card sb-block">
           <div class="search-wrap">
             <el-icon :size="14" style="color:var(--c-text-3)"><Search /></el-icon>
-            <input v-model="keyword" class="search-inp" placeholder="搜索..." @input="apply" />
+            <input v-model="keyword" class="search-inp" placeholder="搜索标题、描述、标签、地点..." @input="onKeywordInput" />
           </div>
         </div>
         <div class="card sb-block">
           <h4>类型</h4>
-          <button v-for="[k,v] in Object.entries(ItemTypeLabels) as [ItemType,string][]" :key="k"
-            class="chip" :class="{ on: selType === k }" @click="selType = selType === k ? '' : k; apply()">{{ v }}</button>
+          <button
+            v-for="(label, key) in ItemTypeLabels"
+            :key="key"
+            class="chip"
+            :class="{ on: selType === key }"
+            @click="toggleType(key)"
+          >
+            {{ label }}
+          </button>
         </div>
         <div class="card sb-block">
           <h4>校区</h4>
-          <button v-for="c in campuses" :key="c"
-            class="chip" :class="{ on: selCampus === c }" @click="selCampus = selCampus === c ? '' : c; apply()">{{ c.replace('校区','') }}</button>
+          <button
+            v-for="c in campuses"
+            :key="c"
+            class="chip"
+            :class="{ on: selCampus === c }"
+            @click="toggleCampus(c)"
+          >
+            {{ c.replace('校区', '') }}
+          </button>
         </div>
         <div class="card sb-block">
           <h4>状态</h4>
-          <button v-for="[k,v] in Object.entries(ItemStatusLabels) as [ItemStatus,string][]" :key="k"
-            class="chip" :class="{ on: selStatus === k }" @click="selStatus = selStatus === k ? '' : k; apply()">{{ v }}</button>
+          <button
+            v-for="(label, key) in ItemStatusLabels"
+            :key="key"
+            class="chip"
+            :class="{ on: selStatus === key }"
+            @click="toggleStatus(key)"
+          >
+            {{ label }}
+          </button>
         </div>
         <button v-if="hasFilters" class="btn btn--ghost btn--sm" style="width:100%" @click="clearAll">清除筛选</button>
       </aside>
@@ -75,9 +160,9 @@ async function toggle(item: CampusItem) { await favoritesStore.toggleFavorite(it
         <div class="toolbar">
           <span class="t-count"><strong>{{ itemsStore.items.length }}</strong> 条结果</span>
           <div class="sort-row">
-            <button class="sbtn" :class="{ on: sort === 'createdAt' }" @click="sort='createdAt';apply()">最新</button>
-            <button class="sbtn" :class="{ on: sort === 'viewCount' }" @click="sort='viewCount';apply()">最热</button>
-            <button class="sbtn" :class="{ on: sort === 'price' }" @click="sort='price';apply()">价格</button>
+            <button class="sbtn" :class="{ on: sort === 'createdAt' }" @click="setSort('createdAt')">最新</button>
+            <button class="sbtn" :class="{ on: sort === 'viewCount' }" @click="setSort('viewCount')">最热</button>
+            <button class="sbtn" :class="{ on: sort === 'price' }" @click="setSort('price')">价格</button>
           </div>
         </div>
 
@@ -89,8 +174,8 @@ async function toggle(item: CampusItem) { await favoritesStore.toggleFavorite(it
         </div>
         <div v-else class="items-grid">
           <div v-for="item in itemsStore.items" :key="item.id" style="position:relative">
-            <ItemCard :item="item" @click="router.push(`/detail/${item.id}`)" />
-            <button class="fav-dot" :class="{ on: isFav(item.id) }" @click.stop="toggle(item)">
+            <ItemCard :item="item" @click="router.push(`/detail/${item.type}/${item.id}`)" />
+            <button class="fav-dot" :class="{ on: isFav(item.id) }" @click.stop="toggleFav(item)">
               {{ isFav(item.id) ? '★' : '☆' }}
             </button>
           </div>

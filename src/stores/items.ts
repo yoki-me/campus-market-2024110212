@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { CampusItem, ItemFilters } from '@/types'
+import type { CampusItem, ItemFilters, ItemType } from '@/types'
 import { getItems, getItem, createItem, updateItem, incrementViewCount } from '@/api/items'
 import { useUserStore } from './user'
 
@@ -34,13 +34,13 @@ export const useItemsStore = defineStore('items', () => {
   }
 
   // 获取详情
-  async function fetchItem(id: string) {
+  async function fetchItem(type: ItemType, id: string) {
     loading.value = true
     try {
-      currentItem.value = await getItem(id)
+      currentItem.value = await getItem(type, id)
       // 增加浏览次数
       if (currentItem.value) {
-        incrementViewCount(id, currentItem.value.viewCount).then((updated) => {
+        incrementViewCount(type, id, currentItem.value.viewCount).then((updated) => {
           currentItem.value = updated
         })
       }
@@ -64,8 +64,8 @@ export const useItemsStore = defineStore('items', () => {
   }
 
   // 更新状态
-  async function updateStatus(id: string, status: CampusItem['status']) {
-    const updated = await updateItem(id, { status })
+  async function updateStatus(type: ItemType, id: string, status: CampusItem['status']) {
+    const updated = await updateItem(type, id, { status })
     if (currentItem.value?.id === id) {
       currentItem.value = updated
     }

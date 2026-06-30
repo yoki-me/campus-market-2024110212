@@ -1,4 +1,4 @@
-import http from './http'
+import http, { nextId } from './http'
 
 export interface LostFoundItem {
   id: string
@@ -30,10 +30,12 @@ export function getLostFoundById(id: string) {
   return http.get<LostFoundItem>(`/lostFounds/${id}`)
 }
 
-/** 新增失物招领 */
-export function createLostFound(data: Omit<LostFoundItem, 'id' | 'createdAt' | 'updatedAt'>) {
+/** 新增失物招领（生成带前缀的顺序 id） */
+export async function createLostFound(data: Omit<LostFoundItem, 'id' | 'createdAt' | 'updatedAt'>) {
+  const id = await nextId('lostFounds', 'lf')
   return http.post<LostFoundItem>('/lostFounds', {
     ...data,
+    id,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   })

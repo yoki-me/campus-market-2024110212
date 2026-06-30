@@ -1,4 +1,4 @@
-import http from './http'
+import http, { nextId } from './http'
 
 export interface ErrandItem {
   id: string
@@ -29,10 +29,12 @@ export function getErrandById(id: string) {
   return http.get<ErrandItem>(`/errands/${id}`)
 }
 
-/** 新增跑腿委托 */
-export function createErrand(data: Omit<ErrandItem, 'id' | 'createdAt' | 'updatedAt'>) {
+/** 新增跑腿委托（生成带前缀的顺序 id） */
+export async function createErrand(data: Omit<ErrandItem, 'id' | 'createdAt' | 'updatedAt'>) {
+  const id = await nextId('errands', 'e')
   return http.post<ErrandItem>('/errands', {
     ...data,
+    id,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   })

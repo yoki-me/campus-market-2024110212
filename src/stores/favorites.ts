@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Favorite, CampusItem } from '@/types'
-import { getCollectionFromId } from '@/types'
+import type { Favorite, CampusItem, ItemType } from '@/types'
 import {
   getFavorites,
   getFavoriteByUserAndItem,
@@ -47,7 +46,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
     }
   }
 
-  async function toggleFavorite(itemId: string): Promise<boolean> {
+  async function toggleFavorite(itemId: string, collection: ItemType): Promise<boolean> {
     const userStore = useUserStore()
     if (!userStore.userId) return false
 
@@ -61,7 +60,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
       const fav = await addFavorite({
         userId: userStore.userId,
         itemId,
-        collection: getCollectionFromId(itemId),
+        collection,
       })
       favorites.value.push(fav)
       return true

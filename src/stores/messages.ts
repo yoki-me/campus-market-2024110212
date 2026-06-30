@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Conversation, Message } from '@/types'
-import { getCollectionFromId } from '@/types'
+import type { ItemType } from '@/types'
 import { getConversations, getConversationByItemAndUser, createConversation, updateConversation } from '@/api/conversations'
 import { getMessages, sendMessage as sendMessageApi, markAsRead } from '@/api/messages'
 import { useUserStore } from './user'
@@ -122,7 +122,7 @@ export const useMessagesStore = defineStore('messages', () => {
   }
 
   // 创建会话
-  async function openConversation(itemId: string, publisherId: string): Promise<Conversation> {
+  async function openConversation(itemId: string, publisherId: string, collection: ItemType): Promise<Conversation> {
     const userStore = useUserStore()
     // 检查是否已有会话
     const existing = conversations.value.find(
@@ -131,8 +131,7 @@ export const useMessagesStore = defineStore('messages', () => {
     if (existing) return existing
 
     // 获取物品信息
-    const item = await getItem(itemId)
-    const collection = getCollectionFromId(itemId)
+    const item = await getItem(collection, itemId)
     const conv = await createConversation({
       itemId,
       collection,

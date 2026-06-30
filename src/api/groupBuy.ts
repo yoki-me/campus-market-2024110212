@@ -1,4 +1,4 @@
-import http from './http'
+import http, { nextId } from './http'
 
 export interface GroupBuyItem {
   id: string
@@ -30,10 +30,12 @@ export function getGroupBuyById(id: string) {
   return http.get<GroupBuyItem>(`/groupBuys/${id}`)
 }
 
-/** 新增拼单搭子 */
-export function createGroupBuy(data: Omit<GroupBuyItem, 'id' | 'createdAt' | 'updatedAt'>) {
+/** 新增拼单搭子（生成带前缀的顺序 id） */
+export async function createGroupBuy(data: Omit<GroupBuyItem, 'id' | 'createdAt' | 'updatedAt'>) {
+  const id = await nextId('groupBuys', 'gb')
   return http.post<GroupBuyItem>('/groupBuys', {
     ...data,
+    id,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   })
