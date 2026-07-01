@@ -2,17 +2,24 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMessagesStore } from '@/stores/messages'
+import { useUserStore } from '@/stores/user'
 
 const route = useRoute()
 const messagesStore = useMessagesStore()
+const userStore = useUserStore()
 
-const tabs = [
+const tabs = computed(() => [
   { path: '/', label: '首页', icon: '🏠' },
   { path: '/list', label: '集市', icon: '🛒' },
   { path: '/publish', label: '发布', icon: '➕' },
   { path: '/message', label: '消息', icon: '💬', badge: true },
-  { path: '/profile', label: '我的', icon: '👤' },
-]
+  {
+    path: '/profile',
+    label: userStore.currentUser?.nickname || '我的',
+    icon: '👤',
+    isProfile: true,
+  },
+])
 
 function isActive(path: string): boolean {
   if (path === '/') return route.path === '/'
@@ -30,7 +37,13 @@ function isActive(path: string): boolean {
       :class="{ active: isActive(tab.path) }"
     >
       <span class="nav-icon">
-        {{ tab.icon }}
+        <img
+          v-if="tab.isProfile && userStore.currentUser?.avatar"
+          :src="userStore.currentUser.avatar"
+          class="nav-avatar"
+          alt=""
+        />
+        <span v-else>{{ tab.icon }}</span>
         <span v-if="tab.badge && messagesStore.totalUnreadCount > 0" class="nav-badge">
           {{ messagesStore.totalUnreadCount > 99 ? '99+' : messagesStore.totalUnreadCount }}
         </span>
@@ -86,6 +99,14 @@ function isActive(path: string): boolean {
   position: relative;
   font-size: 22px;
   line-height: 1;
+}
+
+.nav-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
 }
 
 .nav-badge {

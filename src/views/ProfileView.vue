@@ -34,6 +34,11 @@ async function updateStatus(item: CampusItem, status: ItemStatus) {
 }
 async function removeFav(item: CampusItem) { await favoritesStore.toggleFavorite(item.id, item.type); await favoritesStore.fetchFavoritesWithItems() }
 function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-CN') }
+
+function doLogout() {
+  userStore.logout()
+  router.push('/')
+}
 </script>
 
 <template>
@@ -63,6 +68,9 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-
           </button>
           <button class="mi" :class="{ on: tab === 'favorites' }" @click="tab='favorites'">
             <el-icon :size="14"><Star /></el-icon> 我的收藏
+          </button>
+          <button class="mi mi--logout" @click="doLogout">
+            <el-icon :size="14"><Switch /></el-icon> 退出登录
           </button>
         </div>
       </aside>
@@ -133,6 +141,8 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleDateString('zh-
 .mi { display: flex; align-items: center; gap: var(--s-2); width: 100%; padding: 10px 14px; border: none; background: none; border-radius: var(--r-sm); font-family: var(--font); font-size: var(--fs-sm); color: var(--c-text-2); cursor: pointer; transition: all .1s; }
 .mi:hover { background: var(--c-bg); }
 .mi.on { background: var(--c-accent); color: #fff; }
+.mi--logout { color: var(--c-text-3); }
+.mi--logout:hover { background: #fef0f0; color: var(--c-red); }
 .prof-main { min-width: 0; }
 
 .dtbl { width: 100%; border-collapse: collapse; }

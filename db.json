@@ -79,6 +79,36 @@
       "avatar": "",
       "createdAt": "2026-06-30T02:31:35.477Z",
       "id": "dAkU9amWsz8"
+    },
+    {
+      "nickname": "Y",
+      "college": "计算机学院",
+      "campus": "成龙校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-07-01T02:29:43.011Z",
+      "id": "jxx2PBj1Mzw"
+    },
+    {
+      "nickname": "q",
+      "college": "经济管理学院",
+      "campus": "狮子山校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-07-01T03:22:23.645Z",
+      "id": "qfHXxMXHIEc"
+    },
+    {
+      "nickname": "Y",
+      "college": "计算机学院",
+      "campus": "狮子山校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-07-01T03:22:38.117Z",
+      "id": "XDG3IqKh_0E"
     }
   ],
   "trades": [
@@ -103,7 +133,7 @@
       "publisherName": "校园用户",
       "status": "open",
       "allowBargain": true,
-      "viewCount": 238,
+      "viewCount": 239,
       "favoriteCount": 15,
       "createdAt": "2026-06-20T08:30:00.000Z",
       "updatedAt": "2026-06-20T08:30:00.000Z"
@@ -237,6 +267,26 @@
       "favoriteCount": 26,
       "createdAt": "2026-06-22T11:00:00.000Z",
       "updatedAt": "2026-06-22T11:00:00.000Z"
+    },
+    {
+      "title": "马原书",
+      "description": "马原课本，二手",
+      "price": 5,
+      "originalPrice": 0,
+      "condition": "9成新",
+      "campus": "成龙校区",
+      "location": "一教",
+      "tags": [],
+      "images": [],
+      "publisherId": "jxx2PBj1Mzw",
+      "publisherName": "Y",
+      "status": "open",
+      "allowBargain": true,
+      "viewCount": 5,
+      "favoriteCount": 0,
+      "id": "xB7b2gm0C2Y",
+      "createdAt": "2026-07-01T02:51:16.135Z",
+      "updatedAt": "2026-07-01T03:19:47.465Z"
     }
   ],
   "lostFounds": [
@@ -451,7 +501,7 @@
       "publisherId": "u3",
       "publisherName": "图书馆常客",
       "status": "open",
-      "viewCount": 203,
+      "viewCount": 204,
       "favoriteCount": 25,
       "createdAt": "2026-06-21T16:00:00.000Z",
       "updatedAt": "2026-06-26T10:00:00.000Z"
@@ -474,7 +524,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 157,
+      "viewCount": 158,
       "favoriteCount": 9,
       "createdAt": "2026-06-28T12:00:00.000Z",
       "updatedAt": "2026-06-28T12:00:00.000Z"
@@ -703,6 +753,41 @@
       "collection": "trades",
       "createdAt": "2026-06-30T08:27:21.283Z",
       "id": "RP1D_7l5_hc"
+    },
+    {
+      "userId": "jxx2PBj1Mzw",
+      "itemId": "xB7b2gm0C2Y",
+      "collection": "trades",
+      "createdAt": "2026-07-01T02:51:24.063Z",
+      "id": "yt7fIttNlqs"
+    },
+    {
+      "userId": "jxx2PBj1Mzw",
+      "itemId": "t1",
+      "collection": "trades",
+      "createdAt": "2026-07-01T02:51:35.986Z",
+      "id": "Fb7wJlUWf1g"
+    },
+    {
+      "userId": "jxx2PBj1Mzw",
+      "itemId": "gb4",
+      "collection": "groupBuys",
+      "createdAt": "2026-07-01T02:51:49.087Z",
+      "id": "BiOc6QVwfVk"
+    },
+    {
+      "userId": "XDG3IqKh_0E",
+      "itemId": "xB7b2gm0C2Y",
+      "collection": "trades",
+      "createdAt": "2026-07-01T03:22:51.165Z",
+      "id": "Vdc5PIY3sHE"
+    },
+    {
+      "userId": "XDG3IqKh_0E",
+      "itemId": "gb3",
+      "collection": "groupBuys",
+      "createdAt": "2026-07-01T03:23:00.485Z",
+      "id": "f9EQOX5bniM"
     }
   ],
   "conversations": [

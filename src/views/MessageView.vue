@@ -2,12 +2,73 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMessagesStore } from '@/stores/messages'
-import { ChatDotRound } from '@element-plus/icons-vue'
+import { ChatDotRound, Bell, Warning, InfoFilled, Present } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const messagesStore = useMessagesStore()
 const loading = ref(true)
 const filter = ref<'all'|'unread'>('all')
+
+// ==================== 静态系统消息（Day6 铺垫） ====================
+interface SystemMessage {
+  id: number
+  title: string
+  content: string
+  type: 'welcome' | 'tip' | 'safety' | 'notice'
+  time: string
+}
+
+const systemMessages: SystemMessage[] = [
+  {
+    id: 1,
+    title: '👋 欢迎来到校园集市',
+    content: '校园集市是专为本校同学打造的互助平台，你可以在这里发布二手交易、失物招领、拼单搭子和跑腿委托信息，让校园生活更便利。',
+    type: 'welcome',
+    time: '2026-06-28 10:00',
+  },
+  {
+    id: 2,
+    title: '📢 发布功能已上线',
+    content: '现在你可以自由发布四种类型的信息：二手交易、失物招领、拼单搭子和跑腿委托。发布后会自动关联到你的个人主页，方便管理和追踪。',
+    type: 'tip',
+    time: '2026-06-29 14:30',
+  },
+  {
+    id: 3,
+    title: '🔒 交易安全须知',
+    content: '请尽量选择校园公共场所（如图书馆、食堂）进行线下交易。贵重物品当面验货后再付款，警惕异常低价和提前转账要求。遇到可疑行为请及时举报。',
+    type: 'safety',
+    time: '2026-06-30 09:00',
+  },
+  {
+    id: 4,
+    title: '💬 即时聊天即将上线',
+    content: '我们正在开发即时聊天功能，届时你可以直接在平台上与买卖双方沟通，无需切换到其他聊天工具。所有聊天记录将保存在平台内，方便随时回溯。',
+    type: 'notice',
+    time: '2026-07-01 08:00',
+  },
+  {
+    id: 5,
+    title: '🎁 更多功能敬请期待',
+    content: '收藏夹同步、消息推送通知、评价体系等功能正在紧锣密鼓地开发中，敬请期待 Day6 的全面升级！',
+    type: 'notice',
+    time: '2026-07-01 12:00',
+  },
+]
+
+const typeIcon: Record<SystemMessage['type'], typeof Bell> = {
+  welcome: Present,
+  tip: Bell,
+  safety: Warning,
+  notice: InfoFilled,
+}
+
+const typeLabel: Record<SystemMessage['type'], string> = {
+  welcome: '欢迎',
+  tip: '提示',
+  safety: '安全',
+  notice: '公告',
+}
 
 onMounted(async () => { loading.value = true; try { await messagesStore.fetchConversations() } finally { loading.value = false } })
 
@@ -51,10 +112,31 @@ function fmt(dateStr: string) {
         </div>
       </div>
       <div class="msg-main">
-        <div class="msg-placeholder">
-          <el-icon :size="48" style="color:var(--c-border)"><ChatDotRound /></el-icon>
-          <span style="font-weight:600;color:var(--c-text)">选择一条会话</span>
-          <span style="font-size:var(--fs-sm);color:var(--c-text-3)">从左侧选择会话查看聊天详情</span>
+        <div class="sys-msg-area">
+          <div class="sys-msg-header">
+            <h3><el-icon :size="16"><Bell /></el-icon> 系统消息</h3>
+            <span class="sys-msg-sub">为你推送平台通知与使用指南</span>
+          </div>
+          <div class="sys-msg-list">
+            <div
+              v-for="msg in systemMessages"
+              :key="msg.id"
+              class="sys-card"
+              :class="'sys-card--' + msg.type"
+            >
+              <div class="sys-card-icon">
+                <el-icon :size="18"><component :is="typeIcon[msg.type]" /></el-icon>
+              </div>
+              <div class="sys-card-body">
+                <div class="sys-card-head">
+                  <span class="sys-card-tag" :class="'tag--' + msg.type">{{ typeLabel[msg.type] }}</span>
+                  <span class="sys-card-title">{{ msg.title }}</span>
+                  <span class="sys-card-time">{{ msg.time }}</span>
+                </div>
+                <p class="sys-card-text">{{ msg.content }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -86,6 +168,124 @@ function fmt(dateStr: string) {
 .ci-ref { font-size: 10px; color: var(--c-text-3); margin-top: 2px; }
 .msg-main { display: flex; align-items: center; justify-content: center; background: var(--c-bg); }
 .msg-placeholder { display: flex; flex-direction: column; align-items: center; gap: var(--s-3); }
+
+/* ====== 系统消息区域 ====== */
+.sys-msg-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  width: 100%;
+  padding: var(--s-8);
+}
+.sys-msg-header {
+  margin-bottom: var(--s-6);
+}
+.sys-msg-header h3 {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  margin: 0 0 var(--s-1);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--c-text);
+}
+.sys-msg-sub {
+  font-size: var(--fs-xs);
+  color: var(--c-text-3);
+}
+.sys-msg-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 卡片 */
+.sys-card {
+  display: flex;
+  gap: var(--s-4);
+  padding: var(--s-5);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.sys-card:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.sys-card--welcome {
+  border-left: 3px solid #667eea;
+}
+.sys-card--tip {
+  border-left: 3px solid #67c23a;
+}
+.sys-card--safety {
+  border-left: 3px solid #e6a23c;
+}
+.sys-card--notice {
+  border-left: 3px solid #909399;
+}
+
+/* 图标 */
+.sys-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sys-card--welcome .sys-card-icon { background: #eef0ff; color: #667eea; }
+.sys-card--tip .sys-card-icon      { background: #edf7e7; color: #67c23a; }
+.sys-card--safety .sys-card-icon   { background: #fdf3e4; color: #e6a23c; }
+.sys-card--notice .sys-card-icon   { background: #f0f0f0; color: #909399; }
+
+/* 内容 */
+.sys-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.sys-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-2);
+  flex-wrap: wrap;
+}
+.sys-card-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.tag--welcome { background: #eef0ff; color: #667eea; }
+.tag--tip     { background: #edf7e7; color: #67c23a; }
+.tag--safety  { background: #fdf3e4; color: #e6a23c; }
+.tag--notice  { background: #f0f0f0; color: #909399; }
+
+.sys-card-title {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--c-text);
+}
+.sys-card-time {
+  margin-left: auto;
+  font-size: var(--fs-xs);
+  color: var(--c-text-3);
+  white-space: nowrap;
+}
+.sys-card-text {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--c-text-2);
+  line-height: 1.7;
+}
 
 @media (max-width: 768px) { .msg-layout { grid-template-columns: 1fr; } .msg-main { display: none; } }
 </style>
