@@ -16,8 +16,11 @@ const convId = route.params.conversationId as string
 
 onMounted(async () => {
   loading.value = true
-  try { await messagesStore.fetchConversations(); await messagesStore.fetchMessages(convId) }
-  finally { loading.value = false; scroll() }
+  try { 
+    await messagesStore.fetchConversations()
+    await messagesStore.fetchMessages(convId)
+    await messagesStore.markAsRead(convId)
+  } finally { loading.value = false; scroll() }
 })
 
 watch(() => messagesStore.currentMessages.length, () => nextTick(() => scroll()))

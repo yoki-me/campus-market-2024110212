@@ -21,7 +21,7 @@ const loading = ref(true)
 const heroImgs = [
   'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=85',
   'https://images.unsplash.com/photo-1568667256549-094345857637?w=1200&q=85',
-  'https://images.unsplash.com/photo-1592066212433-3e66de2ab57c?w=1200&q=85',
+  'https://aka.doubaocdn.com/s/YFha1whMjq',
 ]
 const heroIdx = ref(0)
 
@@ -87,7 +87,7 @@ function summary(item: CampusItem): string {
         <p class="hero-desc">二手交易 · 失物招领 · 拼单搭子 · 跑腿委托 — 让校园生活更简单</p>
         <div class="hero-acts">
           <button class="btn btn--primary btn--lg" @click="router.push('/list')">浏览集市</button>
-          <button class="btn btn--ghost btn--lg" style="color:#fff;border-color:rgba(255,255,255,.3)" @click="router.push('/publish')">发布信息</button>
+          <button class="btn btn--ghost btn--lg" style="color:#000;border-color:rgba(0,0,0,.3)" @click="router.push('/publish')">发布信息</button>
         </div>
         <div class="hero-dots">
           <span v-for="(_,i) in heroImgs" :key="i" class="dot" :class="{ on: i === heroIdx }"></span>
@@ -133,7 +133,10 @@ function summary(item: CampusItem): string {
             <div v-else-if="!itemsStore.items.length" class="empty-box">暂无信息</div>
             <div v-else class="latest-grid">
               <div v-for="item in itemsStore.items.slice(0,6)" :key="item.id" class="latest-card card" @click="router.push(`/detail/${item.type}/${item.id}`)">
-                <div class="lc-img" :style="{ backgroundImage: item.images?.[0] ? `url(${item.images[0]})` : 'none' }"></div>
+                <div class="lc-img">
+                  <img v-if="item.images?.[0]" :src="item.images[0]" :alt="item.title" />
+                  <div v-else class="lc-img-placeholder"></div>
+                </div>
                 <div class="lc-body">
                   <h3>{{ item.title }}</h3>
                   <span class="lc-price">{{ summary(item) }}</span>
@@ -223,7 +226,9 @@ function summary(item: CampusItem): string {
 .latest-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s-4); }
 .latest-card { overflow: hidden; cursor: pointer; transition: all .15s ease; }
 .latest-card:hover { box-shadow: var(--shadow-md); }
-.lc-img { height: 120px; background-size: cover; background-position: center; background-color: #f0eee9; }
+.lc-img { height: 120px; overflow: hidden; background-color: var(--c-border-2); }
+.lc-img img { width: 100%; height: 100%; object-fit: cover; }
+.lc-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--c-text-3); font-size: var(--fs-xs); }
 .lc-body { padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-1); }
 .lc-body h3 { font-size: var(--fs-sm); font-weight: 600; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .lc-price { font-weight: 700; font-size: var(--fs-base); }

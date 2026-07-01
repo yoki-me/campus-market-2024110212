@@ -34,7 +34,9 @@ function summary(item: CampusItem): string {
 
 <template>
   <div class="ic" @click="emit('click', item)">
-    <div class="ic-img" :style="{ backgroundImage: item.images?.[0] ? `url(${item.images[0]})` : 'none', background: item.images?.[0] ? '' : '#f0eee9' }">
+    <div class="ic-img">
+      <img v-if="item.images?.[0]" :src="item.images[0]" :alt="item.title" />
+      <div v-else class="ic-img-placeholder"></div>
       <span class="ic-type" :style="{ background: typeStyle[item.type] }">{{ ItemTypeLabels[item.type] }}</span>
     </div>
     <div class="ic-body">
@@ -60,9 +62,10 @@ function summary(item: CampusItem): string {
 }
 .ic:hover { box-shadow: var(--shadow-md); }
 .ic-img {
-  height: 160px; background-size: cover; background-position: center;
-  position: relative;
+  height: 160px; position: relative; overflow: hidden; background-color: var(--c-border-2);
 }
+.ic-img img { width: 100%; height: 100%; object-fit: cover; }
+.ic-img-placeholder { width: 100%; height: 100%; }
 .ic-type {
   position: absolute; top: var(--s-3); left: var(--s-3);
   padding: 3px 10px; border-radius: 999px; color: #fff;

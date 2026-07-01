@@ -17,7 +17,9 @@ const isChatPage = computed(() => route.path.startsWith('/chat'))
 
 onMounted(async () => {
   await userStore.loadUser()
-  if (userStore.isLoggedIn) messagesStore.fetchConversations()
+  if (userStore.isLoggedIn) {
+    await messagesStore.fetchConversations()
+  }
 })
 
 const navLinks = [
@@ -76,7 +78,7 @@ const navLinks = [
     </header>
 
     <main :class="['main', { 'main--full': isAuthPage, 'main--chat': isChatPage }]">
-      <RouterView />
+      <RouterView :key="route.path" />
     </main>
   </div>
 </template>
@@ -292,7 +294,7 @@ body {
 .btn--ghost { background: var(--c-surface); color: var(--c-text); border: 1px solid var(--c-border); }
 .btn--ghost:hover { background: var(--c-bg); border-color: var(--c-text-3); }
 .btn--danger { background: var(--c-surface); color: var(--c-red); border: 1px solid #e8d8d6; }
-.btn--danger:hover { background: #faf5f4; }
+.btn--danger:hover { background: #f8f6f6; }
 .btn--sm { padding: 5px 12px; font-size: var(--fs-xs); }
 .btn--lg { padding: 13px 28px; font-size: var(--fs-base); }
 

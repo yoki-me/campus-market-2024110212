@@ -2,10 +2,27 @@ import http from './http'
 import type { Conversation } from '@/types'
 
 export async function getConversations(userId: string): Promise<Conversation[]> {
-  const res = await http.get<Conversation[]>(
-    `/conversations?buyerId=${userId}&_sort=updatedAt&_order=desc`,
-  )
-  return res.data
+  const buyerPromise = http.get<Conversation[]>(`/conversations?buyerId=${userId}`)
+    .then(res => Array.isArray(res.data) ? res.data : (res.data as any).value || [])
+    .catch(() => [])
+
+  const publisherPromise = http.get<Conversation[]>(`/conversations?publisherId=${userId}`)
+    .then(res => Array.isArray(res.data) ? res.data : (res.data as any).value || [])
+    .catch(() => [])
+
+  const [buyerData, publisherData] = await Promise.all([buyerPromise, publisherPromise])
+
+  const allConversations = [...buyerData, ...publisherData]
+  const seen = new Set<string>()
+  const result = allConversations.filter(c => {
+    if (seen.has(c.id)) return false
+    seen.add(c.id)
+    return true
+  })
+
+  result.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+
+  return result
 }
 
 export async function getConversation(id: string): Promise<Conversation> {

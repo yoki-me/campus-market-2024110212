@@ -2,12 +2,11 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Conversation, Message } from '@/types'
 import type { ItemType } from '@/types'
-import { getConversations, getConversationByItemAndUser, createConversation, updateConversation } from '@/api/conversations'
+import { getConversations, getConversation, getConversationByItemAndUser, createConversation, updateConversation } from '@/api/conversations'
 import { getMessages, sendMessage as sendMessageApi, markAsRead } from '@/api/messages'
 import { useUserStore } from './user'
 import { getItem } from '@/api/items'
 
-// 模拟回复模板
 const AUTO_REPLIES = [
   '好的，我看到了，请问有什么可以帮您？',
   '在的，详情可以私聊哦~',
@@ -31,29 +30,38 @@ export const useMessagesStore = defineStore('messages', () => {
     conversations.value.reduce((sum, c) => sum + c.unreadCount, 0),
   )
 
-  // 加载会话列表
   async function fetchConversations() {
     const userStore = useUserStore()
-    if (!userStore.userId) return
+    if (!userStore.userId) {
+      conversations.value = []
+      return
+    }
 
     loading.value = true
     try {
       conversations.value = await getConversations(userStore.userId)
+    } catch {
+      conversations.value = []
     } finally {
       loading.value = false
     }
   }
 
-  // 加载某个会话的消息
   async function fetchMessages(conversationId: string) {
     loading.value = true
     try {
       currentMessages.value = await getMessages(conversationId)
-      // 获取完整会话信息
-      const conv = conversations.value.find((c) => c.id === conversationId)
+      let conv = conversations.value.find((c) => c.id === conversationId)
+      if (!conv) {
+        try {
+          conv = await getConversation(conversationId)
+          conversations.value.unshift(conv)
+        } catch {
+          console.error('Failed to fetch conversation:', conversationId)
+        }
+      }
       if (conv) {
         currentConversation.value = conv
-        // 标记已读
         if (conv.unreadCount > 0) {
           for (const msg of currentMessages.value) {
             if (!msg.read) {
@@ -69,38 +77,48 @@ export const useMessagesStore = defineStore('messages', () => {
     }
   }
 
-  // 发送消息
   async function sendMessage(content: string, messageType: Message['messageType'] = 'text') {
     const userStore = useUserStore()
-    if (!userStore.userId || !currentConversation.value) return null
-
-    const msg = await sendMessageApi({
-      conversationId: currentConversation.value.id,
-      senderId: userStore.userId,
-      receiverId: currentConversation.value.publisherId,
-      content,
-      messageType,
-    })
-    currentMessages.value.push(msg)
-
-    // 更新会话最后消息
-    await updateConversation(currentConversation.value.id, {
-      lastMessage: content,
-      updatedAt: new Date().toISOString(),
-      unreadCount: 1,
-    })
-
-    // 1秒后模拟回复
-    if (messageType === 'text') {
-      setTimeout(async () => {
-        await simulateReply()
-      }, 1000)
+    if (!userStore.userId || !currentConversation.value) {
+      console.error('sendMessage failed:', { userId: userStore.userId, conversation: currentConversation.value })
+      return null
     }
 
-    return msg
+    const isBuyer = userStore.userId === currentConversation.value.buyerId
+    const receiverId = isBuyer ? currentConversation.value.publisherId : currentConversation.value.buyerId
+
+    console.log('Sending message:', { content, conversationId: currentConversation.value.id, senderId: userStore.userId, receiverId })
+
+    try {
+      const msg = await sendMessageApi({
+        conversationId: currentConversation.value.id,
+        senderId: userStore.userId,
+        receiverId,
+        content,
+        messageType,
+      })
+      console.log('Message sent successfully:', msg)
+      currentMessages.value.push(msg)
+
+      await updateConversation(currentConversation.value.id, {
+        lastMessage: content,
+        updatedAt: new Date().toISOString(),
+      })
+      console.log('Conversation updated')
+
+      if (messageType === 'text') {
+        setTimeout(async () => {
+          await simulateReply()
+        }, 1000)
+      }
+
+      return msg
+    } catch (error) {
+      console.error('sendMessage error:', error)
+      throw error
+    }
   }
 
-  // 模拟回复
   async function simulateReply() {
     if (!currentConversation.value) return
 
@@ -121,16 +139,13 @@ export const useMessagesStore = defineStore('messages', () => {
     })
   }
 
-  // 创建会话
   async function openConversation(itemId: string, publisherId: string, collection: ItemType): Promise<Conversation> {
     const userStore = useUserStore()
-    // 检查是否已有会话
     const existing = conversations.value.find(
-      (c) => c.itemId === itemId && c.buyerId === userStore.userId,
+      (c) => c.itemId === itemId && (c.buyerId === userStore.userId || c.publisherId === userStore.userId),
     )
     if (existing) return existing
 
-    // 获取物品信息
     const item = await getItem(collection, itemId)
     const conv = await createConversation({
       itemId,
@@ -147,6 +162,14 @@ export const useMessagesStore = defineStore('messages', () => {
     return conv
   }
 
+  async function markAsRead(conversationId: string) {
+    const conv = conversations.value.find(c => c.id === conversationId)
+    if (conv && conv.unreadCount > 0) {
+      conv.unreadCount = 0
+      await updateConversation(conversationId, { unreadCount: 0 })
+    }
+  }
+
   return {
     conversations,
     currentMessages,
@@ -157,5 +180,6 @@ export const useMessagesStore = defineStore('messages', () => {
     fetchMessages,
     sendMessage,
     openConversation,
+    markAsRead,
   }
 })

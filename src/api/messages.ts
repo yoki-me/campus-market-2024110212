@@ -3,9 +3,11 @@ import type { Message } from '@/types'
 
 export async function getMessages(conversationId: string): Promise<Message[]> {
   const res = await http.get<Message[]>(
-    `/messages?conversationId=${conversationId}&_sort=createdAt&_order=asc`,
+    `/messages?conversationId=${conversationId}`,
   )
-  return res.data
+  const data = Array.isArray(res.data) ? res.data : (res.data as any).value || []
+  data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+  return data
 }
 
 export async function sendMessage(

@@ -31,84 +31,24 @@
       "createdAt": "2026-06-03T10:00:00.000Z"
     },
     {
-      "nickname": "w",
-      "college": "理学院",
-      "campus": "狮子山校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-29T01:53:41.477Z",
-      "id": "l6gQpGcKzdQ"
-    },
-    {
-      "nickname": "w",
-      "college": "电子信息学院",
-      "campus": "遂宁校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-29T03:30:30.599Z",
-      "id": "jgZyszranKg"
-    },
-    {
-      "nickname": "w",
-      "college": "计算机学院",
-      "campus": "狮子山校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-29T03:52:20.158Z",
-      "id": "1AUTrFpJ0jg"
-    },
-    {
-      "nickname": "w",
-      "college": "计算机学院",
-      "campus": "狮子山校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-29T03:52:40.917Z",
-      "id": "7Nj79eSpSWA"
-    },
-    {
-      "nickname": "w",
-      "college": "计算机学院",
-      "campus": "狮子山校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-06-30T02:31:35.477Z",
-      "id": "dAkU9amWsz8"
-    },
-    {
-      "nickname": "Y",
-      "college": "计算机学院",
-      "campus": "成龙校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-07-01T02:29:43.011Z",
-      "id": "jxx2PBj1Mzw"
-    },
-    {
-      "nickname": "q",
-      "college": "经济管理学院",
-      "campus": "狮子山校区",
-      "role": "学生",
-      "creditScore": 100,
-      "avatar": "",
-      "createdAt": "2026-07-01T03:22:23.645Z",
-      "id": "qfHXxMXHIEc"
-    },
-    {
       "nickname": "Y",
       "college": "计算机学院",
       "campus": "狮子山校区",
       "role": "学生",
       "creditScore": 100,
       "avatar": "",
-      "createdAt": "2026-07-01T03:22:38.117Z",
-      "id": "XDG3IqKh_0E"
+      "createdAt": "2026-07-01T06:07:36.888Z",
+      "id": "toXtPjo68oo"
+    },
+    {
+      "nickname": "测试用户",
+      "college": "计算机学院",
+      "campus": "狮子山校区",
+      "role": "学生",
+      "creditScore": 100,
+      "avatar": "",
+      "createdAt": "2026-07-01T07:21:38.998Z",
+      "id": "8ed5rWl-Se8"
     }
   ],
   "trades": [
@@ -133,7 +73,7 @@
       "publisherName": "校园用户",
       "status": "open",
       "allowBargain": true,
-      "viewCount": 239,
+      "viewCount": 240,
       "favoriteCount": 15,
       "createdAt": "2026-06-20T08:30:00.000Z",
       "updatedAt": "2026-06-20T08:30:00.000Z"
@@ -159,7 +99,7 @@
       "publisherName": "校园用户",
       "status": "open",
       "allowBargain": false,
-      "viewCount": 156,
+      "viewCount": 159,
       "favoriteCount": 8,
       "createdAt": "2026-06-19T14:20:00.000Z",
       "updatedAt": "2026-06-19T14:20:00.000Z"
@@ -282,7 +222,7 @@
       "publisherName": "Y",
       "status": "open",
       "allowBargain": true,
-      "viewCount": 5,
+      "viewCount": 23,
       "favoriteCount": 0,
       "id": "xB7b2gm0C2Y",
       "createdAt": "2026-07-01T02:51:16.135Z",
@@ -333,7 +273,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 68,
+      "viewCount": 69,
       "favoriteCount": 5,
       "createdAt": "2026-06-26T09:00:00.000Z",
       "updatedAt": "2026-06-26T09:00:00.000Z"
@@ -357,7 +297,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "closed",
-      "viewCount": 45,
+      "viewCount": 46,
       "favoriteCount": 2,
       "createdAt": "2026-06-24T11:30:00.000Z",
       "updatedAt": "2026-06-25T18:00:00.000Z"
@@ -380,7 +320,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "open",
-      "viewCount": 134,
+      "viewCount": 135,
       "favoriteCount": 8,
       "createdAt": "2026-06-27T16:30:00.000Z",
       "updatedAt": "2026-06-27T16:30:00.000Z"
@@ -402,7 +342,7 @@
       "publisherId": "u3",
       "publisherName": "图书馆常客",
       "status": "open",
-      "viewCount": 57,
+      "viewCount": 58,
       "favoriteCount": 1,
       "createdAt": "2026-06-28T08:00:00.000Z",
       "updatedAt": "2026-06-28T08:00:00.000Z"
@@ -424,10 +364,29 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 78,
+      "viewCount": 79,
       "favoriteCount": 4,
       "createdAt": "2026-06-26T19:00:00.000Z",
       "updatedAt": "2026-06-26T19:00:00.000Z"
+    },
+    {
+      "title": "找钥匙",
+      "description": "钥匙链有一个hello kitty的挂件，在食堂丢的，哪位好心人看见了",
+      "type": "lost",
+      "campus": "狮子山校区",
+      "location": "东苑食堂",
+      "eventTime": "2026-07-01",
+      "itemFeature": "",
+      "tags": [],
+      "images": [],
+      "publisherId": "XDG3IqKh_0E",
+      "publisherName": "Y",
+      "status": "open",
+      "viewCount": 5,
+      "favoriteCount": 0,
+      "id": "ALqQj8ayJAM",
+      "createdAt": "2026-07-01T06:05:50.852Z",
+      "updatedAt": "2026-07-01T06:05:50.852Z"
     }
   ],
   "groupBuys": [
@@ -451,7 +410,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "closed",
-      "viewCount": 180,
+      "viewCount": 181,
       "favoriteCount": 12,
       "createdAt": "2026-06-27T15:00:00.000Z",
       "updatedAt": "2026-06-28T19:00:00.000Z"
@@ -524,7 +483,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 158,
+      "viewCount": 159,
       "favoriteCount": 9,
       "createdAt": "2026-06-28T12:00:00.000Z",
       "updatedAt": "2026-06-28T12:00:00.000Z"
@@ -572,7 +531,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "open",
-      "viewCount": 102,
+      "viewCount": 108,
       "favoriteCount": 7,
       "createdAt": "2026-06-28T14:00:00.000Z",
       "updatedAt": "2026-06-28T14:00:00.000Z"
@@ -598,7 +557,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "closed",
-      "viewCount": 97,
+      "viewCount": 98,
       "favoriteCount": 4,
       "createdAt": "2026-06-27T10:00:00.000Z",
       "updatedAt": "2026-06-28T16:00:00.000Z"
@@ -646,7 +605,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "closed",
-      "viewCount": 136,
+      "viewCount": 138,
       "favoriteCount": 6,
       "createdAt": "2026-06-20T07:00:00.000Z",
       "updatedAt": "2026-06-20T08:30:00.000Z"
@@ -668,7 +627,7 @@
       "publisherId": "u3",
       "publisherName": "图书馆常客",
       "status": "open",
-      "viewCount": 44,
+      "viewCount": 46,
       "favoriteCount": 2,
       "createdAt": "2026-06-28T08:00:00.000Z",
       "updatedAt": "2026-06-28T08:00:00.000Z"
@@ -690,7 +649,7 @@
       "publisherId": "u2",
       "publisherName": "小橘子",
       "status": "open",
-      "viewCount": 204,
+      "viewCount": 209,
       "favoriteCount": 14,
       "createdAt": "2026-06-28T10:00:00.000Z",
       "updatedAt": "2026-06-28T10:00:00.000Z"
@@ -712,7 +671,7 @@
       "publisherId": "u1",
       "publisherName": "校园用户",
       "status": "open",
-      "viewCount": 192,
+      "viewCount": 193,
       "favoriteCount": 15,
       "createdAt": "2026-06-28T15:00:00.000Z",
       "updatedAt": "2026-06-28T15:00:00.000Z"
@@ -720,148 +679,87 @@
   ],
   "favorites": [
     {
-      "id": "f1",
-      "userId": "u1",
-      "itemId": "t1",
-      "collection": "trades",
-      "createdAt": "2026-06-25T12:00:00.000Z"
-    },
-    {
-      "id": "f2",
-      "userId": "u1",
-      "itemId": "t3",
-      "collection": "trades",
-      "createdAt": "2026-06-26T15:30:00.000Z"
-    },
-    {
-      "id": "f3",
-      "userId": "u2",
-      "itemId": "gb2",
+      "userId": "toXtPjo68oo",
+      "itemId": "gb6",
       "collection": "groupBuys",
-      "createdAt": "2026-06-23T10:00:00.000Z"
-    },
-    {
-      "id": "f4",
-      "userId": "u3",
-      "itemId": "e2",
-      "collection": "errands",
-      "createdAt": "2026-06-27T09:00:00.000Z"
-    },
-    {
-      "userId": "l6gQpGcKzdQ",
-      "itemId": "t6",
-      "collection": "trades",
-      "createdAt": "2026-06-30T08:27:21.283Z",
-      "id": "RP1D_7l5_hc"
-    },
-    {
-      "userId": "jxx2PBj1Mzw",
-      "itemId": "xB7b2gm0C2Y",
-      "collection": "trades",
-      "createdAt": "2026-07-01T02:51:24.063Z",
-      "id": "yt7fIttNlqs"
-    },
-    {
-      "userId": "jxx2PBj1Mzw",
-      "itemId": "t1",
-      "collection": "trades",
-      "createdAt": "2026-07-01T02:51:35.986Z",
-      "id": "Fb7wJlUWf1g"
-    },
-    {
-      "userId": "jxx2PBj1Mzw",
-      "itemId": "gb4",
-      "collection": "groupBuys",
-      "createdAt": "2026-07-01T02:51:49.087Z",
-      "id": "BiOc6QVwfVk"
-    },
-    {
-      "userId": "XDG3IqKh_0E",
-      "itemId": "xB7b2gm0C2Y",
-      "collection": "trades",
-      "createdAt": "2026-07-01T03:22:51.165Z",
-      "id": "Vdc5PIY3sHE"
-    },
-    {
-      "userId": "XDG3IqKh_0E",
-      "itemId": "gb3",
-      "collection": "groupBuys",
-      "createdAt": "2026-07-01T03:23:00.485Z",
-      "id": "f9EQOX5bniM"
+      "createdAt": "2026-07-01T06:33:12.465Z",
+      "id": "4wxSmUV88aw"
     }
   ],
   "conversations": [
     {
-      "id": "c1",
-      "itemId": "t1",
-      "collection": "trades",
-      "buyerId": "u1",
-      "publisherId": "u1",
-      "lastMessage": "你好，这款电脑还在吗？",
-      "unreadCount": 0,
-      "updatedAt": "2026-06-25T12:30:00.000Z",
-      "itemTitle": "二手笔记本电脑 ThinkPad X1",
-      "otherUserName": "校园用户"
-    },
-    {
-      "itemId": "gb4",
-      "collection": "groupBuys",
-      "buyerId": "l6gQpGcKzdQ",
-      "publisherId": "u2",
-      "lastMessage": "",
-      "unreadCount": 0,
-      "updatedAt": "2026-06-29T03:18:05.454Z",
-      "itemTitle": "健身房月卡拼团",
-      "otherUserName": "小橘子",
-      "id": "xUCfwTpl_t4"
-    },
-    {
-      "itemId": "t4",
-      "collection": "trades",
-      "buyerId": "l6gQpGcKzdQ",
-      "publisherId": "u1",
-      "lastMessage": "",
-      "unreadCount": 0,
-      "updatedAt": "2026-06-29T09:13:34.397Z",
-      "itemTitle": "宿舍用小冰箱 50L",
-      "otherUserName": "校园用户",
-      "id": "IgETzMYLh_4"
-    },
-    {
-      "itemId": "t5",
-      "collection": "trades",
-      "buyerId": "l6gQpGcKzdQ",
-      "publisherId": "u3",
-      "lastMessage": "",
-      "unreadCount": 0,
-      "updatedAt": "2026-06-30T02:48:19.463Z",
-      "itemTitle": "机械键盘 Cherry MX红轴",
-      "otherUserName": "图书馆常客",
-      "id": "tT51Hn-NvVI"
-    },
-    {
-      "itemId": "e6",
+      "itemId": "e5",
       "collection": "errands",
-      "buyerId": "l6gQpGcKzdQ",
-      "publisherId": "u1",
-      "lastMessage": "",
+      "buyerId": "toXtPjo68oo",
+      "publisherId": "u2",
+      "lastMessage": "抱歉，已经出了，忘记更新状态了",
       "unreadCount": 0,
-      "updatedAt": "2026-06-30T08:27:00.953Z",
-      "itemTitle": "代打印毕业论文——急！",
-      "otherUserName": "校园用户",
-      "id": "41cHC9bLhB0"
+      "updatedAt": "2026-07-01T06:50:45.699Z",
+      "itemTitle": "代搬行李——女生宿舍换楼层",
+      "otherUserName": "小橘子",
+      "id": "uOB2zWDDfi4"
     }
   ],
   "messages": [
     {
-      "id": "m1",
-      "conversationId": "c1",
-      "senderId": "u1",
+      "conversationId": "QPdzmP1xW0A",
+      "senderId": "toXtPjo68oo",
       "receiverId": "u1",
-      "content": "你好，这款电脑还在吗？",
+      "content": "你好",
       "messageType": "text",
-      "createdAt": "2026-06-25T12:30:00.000Z",
-      "read": true
+      "createdAt": "2026-07-01T06:29:44.826Z",
+      "read": false,
+      "id": "XlAM36yJtYg"
+    },
+    {
+      "conversationId": "QPdzmP1xW0A",
+      "senderId": "u1",
+      "receiverId": "toXtPjo68oo",
+      "content": "好的，价格可以商量",
+      "messageType": "text",
+      "createdAt": "2026-07-01T06:29:45.862Z",
+      "read": false,
+      "id": "9JA-dI9Jl3A"
+    },
+    {
+      "conversationId": "uOB2zWDDfi4",
+      "senderId": "toXtPjo68oo",
+      "receiverId": "u2",
+      "content": "你好",
+      "messageType": "text",
+      "createdAt": "2026-07-01T06:31:20.298Z",
+      "read": false,
+      "id": "iBUnF1e3xLc"
+    },
+    {
+      "conversationId": "uOB2zWDDfi4",
+      "senderId": "u2",
+      "receiverId": "toXtPjo68oo",
+      "content": "在的，详情可以私聊哦~",
+      "messageType": "text",
+      "createdAt": "2026-07-01T06:31:21.341Z",
+      "read": false,
+      "id": "au5Urv7Kx0U"
+    },
+    {
+      "conversationId": "uOB2zWDDfi4",
+      "senderId": "toXtPjo68oo",
+      "receiverId": "u2",
+      "content": "便宜一点",
+      "messageType": "text",
+      "createdAt": "2026-07-01T06:50:44.654Z",
+      "read": false,
+      "id": "D9v2XuNHie4"
+    },
+    {
+      "conversationId": "uOB2zWDDfi4",
+      "senderId": "u2",
+      "receiverId": "toXtPjo68oo",
+      "content": "抱歉，已经出了，忘记更新状态了",
+      "messageType": "text",
+      "createdAt": "2026-07-01T06:50:45.689Z",
+      "read": false,
+      "id": "y6smFEsyUuU"
     }
   ],
   "notices": [

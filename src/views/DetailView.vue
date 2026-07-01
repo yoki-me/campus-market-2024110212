@@ -64,7 +64,9 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleString('zh-CN',
       <div class="dt-layout">
         <!-- Left -->
         <div class="dt-main">
-          <div class="dt-img card" :style="{ backgroundImage: item.images?.[0] ? `url(${item.images[0]})` : 'none' }">
+          <div class="dt-img card">
+            <img v-if="item.images?.[0]" :src="item.images[0]" :alt="item.title" />
+            <div v-else class="dt-img-placeholder"></div>
             <span class="dt-type" :style="{ background: {trades:'#8b6914',lostFounds:'#2d5a27',groupBuys:'#5b5ea6',errands:'#6b705c'}[item.type] }">{{ ItemTypeLabels[item.type] }}</span>
           </div>
           <section class="card" style="padding:var(--s-6);margin-bottom:var(--s-5)">
@@ -149,7 +151,9 @@ function fmt(dateStr: string) { return new Date(dateStr).toLocaleString('zh-CN',
 .dt-layout { display: grid; grid-template-columns: 1fr 380px; gap: var(--s-6); align-items: start; }
 .dt-main { min-width: 0; }
 .dt-side { position: sticky; top: 68px; display: flex; flex-direction: column; gap: var(--s-4); }
-.dt-img { height: 340px; background-size: cover; background-position: center; border-radius: var(--r-lg); position: relative; background-color: #f0eee9; }
+.dt-img { height: 340px; border-radius: var(--r-lg); position: relative; overflow: hidden; background-color: var(--c-border-2); }
+.dt-img img { width: 100%; height: 100%; object-fit: cover; }
+.dt-img-placeholder { width: 100%; height: 100%; }
 .dt-type { position: absolute; top: var(--s-4); left: var(--s-4); padding: 4px 14px; border-radius: 999px; color: #fff; font-size: var(--fs-xs); font-weight: 600; }
 .sec-title { font-size: var(--fs-md); font-weight: 700; margin: 0 0 var(--s-4); }
 .desc-text { font-size: var(--fs-base); color: var(--c-text-2); line-height: 1.8; margin: 0; }

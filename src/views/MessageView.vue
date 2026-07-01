@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, onActivated, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useMessagesStore } from '@/stores/messages'
 import { ChatDotRound, Bell, Warning, InfoFilled, Present } from '@element-plus/icons-vue'
 
 const router = useRouter()
+const route = useRoute()
 const messagesStore = useMessagesStore()
 const loading = ref(true)
-const filter = ref<'all'|'unread'>('all')
+const filter = ref<'all'|'unread'|'read'>('all')
 
 // ==================== 静态系统消息（Day6 铺垫） ====================
 interface SystemMessage {
@@ -70,9 +71,28 @@ const typeLabel: Record<SystemMessage['type'], string> = {
   notice: '公告',
 }
 
-onMounted(async () => { loading.value = true; try { await messagesStore.fetchConversations() } finally { loading.value = false } })
+async function loadConversations() {
+  loading.value = true
+  try {
+    await messagesStore.fetchConversations()
+  } finally {
+    loading.value = false
+  }
+}
 
-const list = computed(() => filter.value === 'unread' ? messagesStore.conversations.filter(c => c.unreadCount) : messagesStore.conversations)
+onMounted(async () => {
+  await loadConversations()
+})
+
+onActivated(async () => {
+  await loadConversations()
+})
+
+const list = computed(() => {
+  if (filter.value === 'unread') return messagesStore.conversations.filter(c => c.unreadCount)
+  if (filter.value === 'read') return messagesStore.conversations.filter(c => c.unreadCount === 0)
+  return messagesStore.conversations
+})
 const unreadCount = computed(() => messagesStore.totalUnreadCount)
 
 function fmt(dateStr: string) {
@@ -97,6 +117,7 @@ function fmt(dateStr: string) {
         <div class="msg-tabs">
           <button class="mtab" :class="{ on: filter === 'all' }" @click="filter='all'">全部</button>
           <button class="mtab" :class="{ on: filter === 'unread' }" @click="filter='unread'">未读</button>
+          <button class="mtab" :class="{ on: filter === 'read' }" @click="filter='read'">已读</button>
         </div>
         <div v-if="loading" class="loading-box"><div class="spinner"></div></div>
         <div v-else-if="!list.length" class="empty-box" style="padding:var(--s-8)">暂无消息</div>
